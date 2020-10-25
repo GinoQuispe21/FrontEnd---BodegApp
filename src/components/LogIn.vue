@@ -1,56 +1,91 @@
+
 <template>
-    <v-card class="mx-auto" max-width="550" outlined>
-
-            <div align="center" class="login">Log In</div>
-
+    <v-card>
+        <v-toolbar color="bg-primary" dark>
+            <img :src="require('@/assets/safebag_dark.png')" height="100%" width="15%"/>
+            <v-spacer></v-spacer>
+            <v-toolbar-items class="hidden-sm-and-down">
+                <v-btn text to="/register" class="text-info">
+                    Registrarse
+                </v-btn>
+                <v-btn text to="/homepage" class="text-info">
+                    Página de Inicio
+                </v-btn>
+                <v-divider vertical></v-divider>
+            </v-toolbar-items>
+        </v-toolbar>
+        <template>
+            <div class="container no-gutters ass">
+                <div class="row justify-content-center align-items-center bg-warning register_body">
+                    <div class="column">
+    <v-card class="bg-primary rounded-xl vicard" outlined>
+            <div align="center" class="text-info login">Iniciar Sesión</div>
         <template>
             <v-row justify="center">
-                <v-col cols="12" sm="10" md="8" lg="6">
-                    <v-card ref="form">
+                <v-col cols="10" sm="8" md="8" lg="6">
+                    <v-card style="border-color: #ffce00" class="bg-warning rounded-xl " ref="form" tile>
                         <v-card-text>
                             <v-text-field
                                     ref="user"
                                     v-model="user"
                                     label="User or Email"
+
                                     required outlined>
                             </v-text-field>
                             <v-text-field
+                                    :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
+                                    :type="show3 ? 'text' : 'password'"
                                     ref="password"
                                     v-model="password"
                                     label="Password"
-                                    required outlined>
+                                    required outlined
+                                    @click:append="show3 = !show3">
                             </v-text-field>
                             <div>
-                                <a>¿Olvidaste la contraseña?</a>
+                                <a class="text-secondary">¿Olvidaste la contraseña?</a>
                             </div>
-                            <v-card-actions>
-                                <v-btn depressed
-                                       color="primary"> Login
-                                </v-btn>
-                            </v-card-actions>
+                            <div style="padding: 1rem"></div>
+                            <div class="text-info butt">
+                                <b-button variant="secondary">Iniciar Sesión</b-button>
+                            </div>
+
                         </v-card-text>
-                        <v-divider class="mt-12"></v-divider>
                     </v-card>
                 </v-col>
             </v-row>
+        </template>
+    </v-card>
+                    </div>
+                </div>
+            </div>
         </template>
     </v-card>
 </template>
 
 <script>
     export default {
-        name: "LogIn"
+        name: "LogIn",
     }
 </script>
 
-<style scoped>
+<style lang="scss">
 .login{
     text-align: center;
-    font-size: 75px;
+    font-size: 3.5rem;
     color: white;
 }
-.mx-auto{
-    background: rgb(22,25,29);
-    background: linear-gradient(25deg, rgba(22,25,29,1) 0%, rgba(47,109,228,1) 65%);
+.vicard{
+    width: 800px;
+    margin: 0 auto;
+    border-radius: 75px;
+}
+
+.register_body{
+    height: 100vh;
+    width:  100vw;
+
+}
+.ass{
+    padding: 0;
 }
 </style>
