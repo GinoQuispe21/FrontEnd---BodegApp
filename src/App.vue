@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-     <router-view/>
+     <router-view></router-view>
     </v-main>
   </v-app>
 </template>
@@ -12,7 +12,7 @@ import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
 export default {
   name: 'App',
-  data: () => ({
+    data: () => ({
     //
   }),
 };
