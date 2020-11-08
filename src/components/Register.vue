@@ -17,7 +17,7 @@
     <div class="container no-gutters ass">
         <div class="row justify-content-center align-items-center register_body">
             <div class="justify-content-center align-items-center">
-                <h1 style="text-align: center">Lo mejor en adminitración financiera de bodegas</h1>
+                <h1 style="text-align: center">Lo mejor en administración financiera de bodegas</h1>
                 <img :src="require('@/assets/safebag_color.png')" height="100%" width="15%" class="center"/>
             </div>
             <div style="border-radius: 15px" class="bg-primary col-auto ">
@@ -28,10 +28,15 @@
                             <div class="paddin"></div>
                         <input id="name" type="text" name="f_name" placeholder="Ex. Madeline"/>
                         </div>
-                        <div class="left">
+                        <div style="padding-right: 10px" class="left">
                         <label for="surname">Apellido</label>
                             <div></div>
                         <input id="surname" type="text" name="l_name" placeholder="Ex. Veradi"/>
+                        </div>
+                        <div class="left">
+                            <label for="surname">DNI</label>
+                            <div></div>
+                            <input id="dni" type="number" name="dni" placeholder="Ex. AAAAAAAA"/>
                         </div>
                         <div style="padding-right: 5vw">
                             <label for="address">Dirección</label>
@@ -45,29 +50,30 @@
                             <input id="email" type="text" name="email" placeholder="Example@email.com"/>
                         </div>
                         <div></div>
-                        <div class="left right">
+                        <div class="left right2">
                             <label for="number">Numero de celular</label>
                             <div class="paddin"></div>
                             <input id="number" type="number" name="n_cell" placeholder="Ex. 987654321"/>
                         </div>
-                        <div class="left">
+                        <div style="margin-left: 100px" class="left">
                             <label for="b_date">Fecha de Nacimiento</label>
                             <div></div>
                             <input id="b_date" type="date" name="b_date"/>
                         </div>
                         <div></div>
                         <div style="padding-right: 5vw">
-                            <label for="password">Contraseña</label>
+                            <label for="password">Ingresar contrseña</label>
                             <div></div>
                             <input id="password" type="text" name="password" placeholder="Más de 8 caracteres"/>
                         </div>
+                        <div></div>
                         <div style="padding-right: 5vw">
                             <label for="c_password">Confirmar Contraseña</label>
                             <div></div>
                             <input id="c_password" type="text" name="confirm password" placeholder="Misma contraseña"/>
                         </div>
                         <div></div>
-                        <div class="left right">
+                        <div class="left right2">
                             <label for="currency">Tipo de Moneda</label>
                             <div></div>
                             <select name="t_currency" id="currency" class="c_select">
@@ -75,12 +81,21 @@
                                 <option value="dollar">Dólares($)</option>
                             </select>
                         </div>
-                        <div class="left">
+                        <div></div>
+                        <div class="left right2">
                             <label for="district">Distrito</label>
                             <div></div>
                             <select name="distrcit" id="district" class="c_select">
                                 <option value="SB">San Borja</option>
                                 <option value="L_Ol">Los Olivos</option>
+                            </select>
+                        </div>
+                        <div></div>
+                        <div class="left" style="margin-left: 8rem">
+                            <label for="country">País</label>
+                            <div></div>
+                            <select name="country" id="country" class="c_select">
+                                <option value="p">Perú</option>
                             </select>
                         </div>
                     </form>
@@ -120,6 +135,12 @@
     background-color: #28201e;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+.left{
+    float: left;
+    background-color: #28201e;
+    padding-top: 10px;
+    padding-bottom: 10px;
 
 }
 .alone{
@@ -127,11 +148,15 @@
     padding-bottom: 10px;
 }
 .right{
+    padding-right: 1vw;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.right2{
     padding-right: 5vw;
     padding-top: 10px;
     padding-bottom: 10px;
 }
-
 .register_interface{
     border-radius: 25px;
 }
