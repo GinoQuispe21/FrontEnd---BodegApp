@@ -66,13 +66,15 @@
                     <div style="padding-left: 4rem" class="left">
                         <b-table striped hover :items="items" :fields="fields" ></b-table>
                     </div>
-                    <div>
+                    <div class="text-right">
                         <div style="padding-top: 30rem"></div>
                         <div>
                             <label for="gain">Ganancia</label>
                         </div>
                         <input id="gain" type="number" step="0.1" class="gain"/>
+                        <div style="padding-top: 2rem">
                         <b-btn>Imprimir Boletas</b-btn>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -24,7 +24,7 @@
                 Movimientos
             </v-tab>
             <v-tab class="text-info bg-primary">
-                Venta
+                Registrar Venta
             </v-tab>
             <v-tab-item>
 
@@ -38,6 +38,9 @@
             <v-tab-item>
                 <Movements></Movements>
             </v-tab-item>
+            <v-tab-item>
+                <RegisterSale></RegisterSale>
+            </v-tab-item>
         </v-tabs>
     </v-card>
 </template>
@@ -47,9 +50,10 @@
     import UserData from "@/components/UserData";
     import ChangePassword from "@/components/ChangePassword";
     import Movements from "@/components/Movements";
+    import RegisterSale from "@/components/RegisterSale";
     export default {
         name: "HomePage",
-        components: {Movements, ChangePassword, UserData},
+        components: {RegisterSale, Movements, ChangePassword, UserData},
     }
 </script>
 
