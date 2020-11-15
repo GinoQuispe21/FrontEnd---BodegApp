@@ -45,7 +45,7 @@
                 Editar Productos
             </v-tab>
             <v-tab-item>
-
+                <HomeP></HomeP>
             </v-tab-item>
             <v-tab-item>
                 <UserData></UserData>
@@ -93,9 +93,11 @@
     import RegisterProduct from "@/components/RegisterProduct";
     import EditClient from "@/components/EditClient";
     import EditProduct from "@/components/EditProduct";
+    import HomeP from "@/components/HomeP";
     export default {
         name: "HomePage",
         components: {
+            HomeP,
             EditProduct,
             EditClient,
             RegisterProduct,
