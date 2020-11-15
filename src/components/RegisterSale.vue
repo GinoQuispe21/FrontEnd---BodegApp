@@ -5,7 +5,7 @@
             <div class="row justify-content-center align-items-center register_body">
                 <div class=" col-auto">
                     <div class="help">
-                    <div>
+                    <div class="row col-12">
                         <form>
                             <div class="left right">
                                 <label for="dni">DNI</label>
@@ -31,7 +31,7 @@
                             </div>
                         </form>
                     </div>
-                    <div>
+                    <div class="row col-12">
                         <form>
                             <div class="left right">
                                 <label for="product">DNI</label>
@@ -59,75 +59,77 @@
                             </div>
                         </form>
                     </div>
-                        <div class="col-12">
-                            <div class="row justify-content-center">
+                    <div class=" col-12">
+                        <li v-for="(sale, index) in labels" :key="index" class="table2">
+                            <div class="row justify-content-center col-12">
                                 <div class="row justify-content-center col-3">
-
-                                        <p>Código</p>
-
+                                    <div class="col-auto">
+                                        <p>{{sale.codigo}}</p>
+                                    </div>
                                 </div>
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-3">
-
-                                        <p>Nombre</p>
-
+                                    <div class="col-auto">
+                                        <p>{{sale.producto}}</p>
+                                    </div>
                                 </div>
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-2">
-
-                                        <p>Pre. de Compra</p>
-
+                                    <div class="col-auto">
+                                        <p>{{sale.precio_unitario}}</p>
+                                    </div>
                                 </div>
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-2">
-
-                                        <p>Pre. de Venta</p>
-
+                                    <div class="col-auto">
+                                        <p>{{sale.importe}}</p>
+                                    </div>
                                 </div>
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-2">
-
-                                        <p>Acciones</p>
-
+                                    <div class="col-auto">
+                                        <p>{{sale.codigo}}</p>
+                                    </div>
                                 </div>
                             </div>
                             <hr>
-                        <div class="col-12">
-                            <li v-for="(sale, index) in items" :key="index" class="table">
-                                <div class="row justify-content-center">
-                                    <div class="row justify-content-center col-3">
-                                        <div class="col-auto">
-                                            <p>{{sale.codigo}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="vl"></div>
-                                    <div class="row justify-content-center col-3">
-                                        <div class="col-auto">
-                                            <p>{{sale.producto}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="vl"></div>
-                                    <div class="row justify-content-center col-2">
-                                        <div class="col-auto">
-                                            <p>{{sale.cantidad}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="vl"></div>
-                                    <div class="row justify-content-center col-2">
-                                        <div class="col-auto">
-                                            <p>{{sale.precio_unitario}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="vl"></div>
-                                    <div class="row justify-content-center col-2">
-                                        <div class="col-auto">
-                                            <p>{{sale.importe}}</p>
-                                        </div>
+                        </li>
+                    </div>
+                    <div class=" col-12">
+                        <li v-for="(sale, index) in items" :key="index" class="table">
+                            <div class="row justify-content-center col-12">
+                                <div class="row justify-content-center col-3">
+                                    <div class="col-auto">
+                                        <p>{{sale.codigo}}</p>
                                     </div>
                                 </div>
-                                <hr>
-                            </li>
-                        </div>
+                                <div class="vl"></div>
+                                <div class="row justify-content-center col-3">
+                                    <div class="col-auto">
+                                        <p>{{sale.producto}}</p>
+                                    </div>
+                                </div>
+                                <div class="vl"></div>
+                                <div class="row justify-content-center col-2">
+                                    <div class="col-auto">
+                                        <p>{{sale.cantidad}}</p>
+                                    </div>
+                                </div>
+                                <div class="vl"></div>
+                                <div class="row justify-content-center col-2">
+                                    <div class="col-auto">
+                                        <p>{{sale.precio_unitario}}</p>
+                                    </div>
+                                </div>
+                                <div class="vl"></div>
+                                <div class="row justify-content-center col-2">
+                                    <div class="col-auto">
+                                        <p>{{sale.importe}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        </li>
                     </div>
                     <div style="text-align: right ">
                         <div>
@@ -138,7 +140,7 @@
                         </div>
                     </div>
                     <div>
-                        <div class="text-right ">
+                        <div class="text-right butt">
                             <b-btn>Registrar Venta</b-btn>
                             <b-btn class="bg-danger">Canelar</b-btn>
 
@@ -161,6 +163,9 @@
                 items: [
                     { isActive: true, codigo: 'SW1A', producto: 'Chocolate Moto Moto', cantidad: 2, precio_unitario: 25.00, importe: 12.00 },
                     { isActive: true, codigo: 'EMPE', producto: 'Chocolate Tana', cantidad: 5, precio_unitario: 23.00, importe: 18.00 },
+                ],
+                labels:[
+                    { isActive: true, codigo: 'Código', producto: 'Producto', cantidad: 'Cantidad', precio_unitario: 'Pre. Unitario', importe: 'Importe' },
                 ]
             }
         }
@@ -199,14 +204,26 @@
         display: inline;
         height: 70vh;
         width: 70vw;
-    p{
-        color: #ff775c;
+        p{
+            color: #ff775c;
+        }
     }
+    .table2{
+        list-style: none;
+        display: inline;
+        height: 70vh;
+        width: 70vw;
+        p{
+            color: #ffce00;
+        }
     }
     .vl{
         border-left: 1px solid #ff775c;
         opacity: 0.90;
         height: auto;
+    }
+    .butt{
+        color: #28201e;
     }
     input{
         width: 100%;

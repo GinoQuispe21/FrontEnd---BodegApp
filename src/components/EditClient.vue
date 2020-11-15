@@ -1,7 +1,7 @@
 <template>
     <v-card>
         <div class="container no-gutters ass">
-            <h1>Actualizar Cliente</h1>
+            <h1>Editar Cliente</h1>
             <div class="row justify-content-center align-items-center register_body">
                 <div class="col-auto">
                     <div class="bg-primary register_form">
