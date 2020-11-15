@@ -24,7 +24,25 @@
                 Movimientos
             </v-tab>
             <v-tab class="text-info bg-primary">
-                Registrar Venta
+                Registro de Ventas
+            </v-tab>
+            <v-tab class="text-info bg-primary">
+                Registro de Clientes
+            </v-tab>
+            <v-tab class="text-info bg-primary">
+                Registro de Producto
+            </v-tab>
+            <v-tab class="text-info bg-primary">
+                Lista de Clientes
+            </v-tab>
+            <v-tab class="text-info bg-primary">
+                Lista de Productos
+            </v-tab>
+            <v-tab class="text-info bg-primary">
+                Editar Cliente
+            </v-tab>
+            <v-tab class="text-info bg-primary">
+                Editar Productos
             </v-tab>
             <v-tab-item>
 
@@ -41,6 +59,24 @@
             <v-tab-item>
                 <RegisterSale></RegisterSale>
             </v-tab-item>
+            <v-tab-item>
+                <RegisterClient></RegisterClient>
+            </v-tab-item>
+            <v-tab-item>
+                <RegisterProduct></RegisterProduct>
+            </v-tab-item>
+            <v-tab-item>
+                <ClientList></ClientList>
+            </v-tab-item>
+            <v-tab-item>
+                <ProductList></ProductList>
+            </v-tab-item>
+            <v-tab-item>
+                <EditClient></EditClient>
+            </v-tab-item>
+            <v-tab-item>
+                <EditProduct></EditProduct>
+            </v-tab-item>
         </v-tabs>
     </v-card>
 </template>
@@ -51,9 +87,20 @@
     import ChangePassword from "@/components/ChangePassword";
     import Movements from "@/components/Movements";
     import RegisterSale from "@/components/RegisterSale";
+    import ClientList from "@/components/ClientList";
+    import ProductList from "@/components/ProductList";
+    import RegisterClient from "@/components/RegisterClient";
+    import RegisterProduct from "@/components/RegisterProduct";
+    import EditClient from "@/components/EditClient";
+    import EditProduct from "@/components/EditProduct";
     export default {
         name: "HomePage",
-        components: {RegisterSale, Movements, ChangePassword, UserData},
+        components: {
+            EditProduct,
+            EditClient,
+            RegisterProduct,
+            RegisterClient,
+            ProductList, ClientList, RegisterSale, Movements, ChangePassword, UserData},
     }
 </script>
 

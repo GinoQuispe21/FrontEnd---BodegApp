@@ -59,8 +59,75 @@
                             </div>
                         </form>
                     </div>
-                    <div>
-                        <b-table striped hover :items="items" :fields="fields" class="bg-danger" ></b-table>
+                        <div class="col-12">
+                            <div class="row justify-content-center">
+                                <div class="row justify-content-center col-3">
+
+                                        <p>Código</p>
+
+                                </div>
+                                <div class="vl"></div>
+                                <div class="row justify-content-center col-3">
+
+                                        <p>Nombre</p>
+
+                                </div>
+                                <div class="vl"></div>
+                                <div class="row justify-content-center col-2">
+
+                                        <p>Pre. de Compra</p>
+
+                                </div>
+                                <div class="vl"></div>
+                                <div class="row justify-content-center col-2">
+
+                                        <p>Pre. de Venta</p>
+
+                                </div>
+                                <div class="vl"></div>
+                                <div class="row justify-content-center col-2">
+
+                                        <p>Acciones</p>
+
+                                </div>
+                            </div>
+                            <hr>
+                        <div class="col-12">
+                            <li v-for="(sale, index) in items" :key="index" class="table">
+                                <div class="row justify-content-center">
+                                    <div class="row justify-content-center col-3">
+                                        <div class="col-auto">
+                                            <p>{{sale.codigo}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="vl"></div>
+                                    <div class="row justify-content-center col-3">
+                                        <div class="col-auto">
+                                            <p>{{sale.producto}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="vl"></div>
+                                    <div class="row justify-content-center col-2">
+                                        <div class="col-auto">
+                                            <p>{{sale.cantidad}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="vl"></div>
+                                    <div class="row justify-content-center col-2">
+                                        <div class="col-auto">
+                                            <p>{{sale.precio_unitario}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="vl"></div>
+                                    <div class="row justify-content-center col-2">
+                                        <div class="col-auto">
+                                            <p>{{sale.importe}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            </li>
+                        </div>
                     </div>
                     <div style="text-align: right ">
                         <div>
@@ -93,13 +160,14 @@
                 fields: ['codigo', 'producto', 'cantidad', 'precio_unitario', 'importe'],
                 items: [
                     { isActive: true, codigo: 'SW1A', producto: 'Chocolate Moto Moto', cantidad: 2, precio_unitario: 25.00, importe: 12.00 },
+                    { isActive: true, codigo: 'EMPE', producto: 'Chocolate Tana', cantidad: 5, precio_unitario: 23.00, importe: 18.00 },
                 ]
             }
         }
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .register_body{
         height: 100vh;
         width:  100vw;
@@ -125,6 +193,20 @@
         color: #ff775c;
         font-size: 0.85rem;
 
+    }
+    .table{
+        list-style: none;
+        display: inline;
+        height: 70vh;
+        width: 70vw;
+    p{
+        color: #ff775c;
+    }
+    }
+    .vl{
+        border-left: 1px solid #ff775c;
+        opacity: 0.90;
+        height: auto;
     }
     input{
         width: 100%;
