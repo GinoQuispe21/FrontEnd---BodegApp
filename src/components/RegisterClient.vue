@@ -52,7 +52,7 @@
                     <div class="tasa">
                         <form>
                             <div class="bg-primary left right selection">
-                            <input type="radio" id="1" name="gender" value="male">
+                            <input @click="Paquete1()" type="radio" id="1" name="gender" value="male">
                             <label for="1">
                                 <h1>Paquete 1</h1>
                                 <p><small> Tasa: 10%</small></p>
@@ -64,10 +64,10 @@
                             </div>
                             <div ></div>
                             <div class="bg-primary left right selection">
-                            <input type="radio" id="2" name="gender" value="male">
+                            <input @click="Paquete2()" type="radio" id="2" name="gender" value="male">
                             <label for="2">
                                 <h1>Paquete 2</h1>
-                                <p><small>Tasa: 22%</small></p>
+                                <p><small>Tasa: 25%</small></p>
                                 <p><smalll>Tipo de Interés: Nominal</smalll></p>
                                 <p><small>Periodo: Bimestral</small></p>
                                 <p><small>Capitalización: Diaria</small></p>
@@ -76,7 +76,7 @@
                             </label><br>
                             </div>
                             <div class="bg-primary left right selection">
-                            <input type="radio" id="3" name="gender" value="male">
+                            <input @click="Paquete3()" type="radio" id="3" name="gender" value="male">
                             <label for="3">
                                 <h1>Paquete 3</h1>
                                 <p><small>Tasa: 18%</small></p>
@@ -109,7 +109,6 @@
                 email : null,
 
                 //Datos para Customer Account
-                currentBalance : null,
                 credit : null,
                 interestRate : null,
                 interestRateType : null,
@@ -119,6 +118,30 @@
             }
         },
         methods:{
+          Paquete1(){
+              this.credit = 1000.00;
+              this.interestRate = 0.10;
+              this.interestRateType = 1;
+              this.interestRatePeriod = 1;
+              this.compounding = 0;
+              this.typeYear = 1;
+          },
+          Paquete2(){
+             this.credit = 1500.00;
+             this.interestRate = 0.25;
+             this.interestRateType = 2;
+             this.interestRatePeriod = 2;
+             this.compounding = 1;
+             this.typeYear = 1;
+          } ,
+          Paquete3(){
+            this.credit = 2000.00;
+            this.interestRate = 0.18;
+            this.interestRateType = 3;
+            this.interestRatePeriod = 1;
+            this.compounding = 0;
+            this.typeYear = 1;
+          },
           postCustomer(){
             this.axios.post(baseURL + 'users/1/customers', {
               dni : parseFloat(this.dni),
@@ -132,7 +155,12 @@
             .then((responseUser) => {
               //Create Customer
               this.axios.post(baseURL + 'customers/' + responseUser.data.id + '/customerAccounts', {
-                address: this.form.address,
+                credit : this.credit,
+                interestRate : this.interestRate,
+                interestRateType : this.interestRateType,
+                interestRatePeriod : this.interestRatePeriod,
+                compounding : this.compounding,
+                typeYear : this.typeYear
               })})
           }
         }

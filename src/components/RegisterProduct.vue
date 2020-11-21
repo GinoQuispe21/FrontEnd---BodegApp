@@ -17,11 +17,6 @@
                                 <div class="paddin"></div>
                                 <input v-model="providerName" id="provee" type="text"/>
                             </div>
-                            <div class="left right">
-                                <label for="v_date">Fecha de Vigencia</label>
-                                <div></div>
-                                <input id="v_date" type="date" name="b_date"/>
-                            </div>
                             <div></div>
                             <div class="left right">
                                 <label for="pc">Precio Compra</label>
