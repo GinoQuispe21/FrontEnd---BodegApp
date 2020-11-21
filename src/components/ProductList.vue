@@ -83,7 +83,7 @@
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-2">
                                     <div class="col-auto">
-                                        <b-btn>Eliminar</b-btn>
+                                        <b-btn @click="deleteProduct(product.id)">Eliminar</b-btn>
                                     </div>
                                 </div>
                             </div>
@@ -121,6 +121,10 @@
                 })
         },
         methods:{
+            deleteProduct(productid){
+              this.axios.delete(baseURL + 'products/' + productid).then(response =>{
+                console.log(response)})
+            }
         }
     }
 </script>

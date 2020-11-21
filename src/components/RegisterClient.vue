@@ -9,47 +9,42 @@
                             <div class="left right">
                                 <label for="dni">DNI</label>
                                 <div class="paddin"></div>
-                                <input id="dni" type="text"/>
+                                <input v-model="dni" id="dni" type="text"/>
                             </div>
                             <div class="left right">
                                 <label for="name">Nombre</label>
                                 <div class="paddin"></div>
-                                <input id="name" type="text"  />
+                                <input v-model="customerName" id="name" type="text"  />
                             </div>
                             <div class="left right">
                                 <label for="code">Apellido</label>
                                 <div class="paddin"></div>
-                                <input id="code" type="text" />
+                                <input v-model="customerLastname" id="code" type="text" />
                             </div>
                             <div></div>
                             <div class="left right">
                                 <label for="address">Dirección</label>
                                 <div class="paddin"></div>
-                                <input id="address" type="text"/>
+                                <input v-model="address" id="address" type="text"/>
                             </div>
                             <div class="left right">
-                                <label for="district">Distrito</label>
-                                <div></div>
-                                <select name="distrcit" id="district" class="c_select">
-                                    <option value="SB">San Borja</option>
-                                    <option value="L_Ol">Los Olivos</option>
-                                </select>
+                                <label for="name">Distrito</label>
+                                <div class="paddin"></div>
+                                <input v-model="district" id="district" type="text"/>
                             </div>
                             <div class="left right">
-                                <label for="country">País</label>
-                                <div></div>
-                                <select name="country" id="country" class="c_select">
-                                    <option value="p">Perú</option>
-                                </select>
+                                <label for="name">Pais</label>
+                                <div class="paddin"></div>
+                                <input v-model="country" id="country" type="text"/>
                             </div>
                             <div class="left right">
                                 <label for="email">Correo electrónico</label>
                                 <div class="paddin"></div>
-                                <input id="email" type="email"  />
+                                <input v-model="email" id="email" type="email"  />
                             </div>
                             <div style="padding-top: 3rem"></div>
                             <div class="text-right">
-                                <b-btn class="btt">Registrar</b-btn>
+                                <b-btn @click="postCustomer()" class="btt">Registrar</b-btn>
                             </div>
                         </form>
                     </div>
@@ -100,8 +95,47 @@
 </template>
 
 <script>
+    import { baseURL } from '@/baseURL';
     export default {
-        name: "RegisterClient"
+        name: "RegisterClient",
+        data: ()=>{
+            return {
+                dni : null,
+                customerName : null,
+                customerLastname : null,
+                address : null,
+                district : null,
+                country : null,
+                email : null,
+
+                //Datos para Customer Account
+                currentBalance : null,
+                credit : null,
+                interestRate : null,
+                interestRateType : null,
+                interestRatePeriod : null,
+                compounding : null,
+                typeYear : null
+            }
+        },
+        methods:{
+          postCustomer(){
+            this.axios.post(baseURL + 'users/1/customers', {
+              dni : parseFloat(this.dni),
+              customerName : this.customerName,
+              customerLastname : this.customerLastname,
+              address : this.address,
+              district : this.district,
+              country : this.country,
+              email : this.email
+            })
+            .then((responseUser) => {
+              //Create Customer
+              this.axios.post(baseURL + 'customers/' + responseUser.data.id + '/customerAccounts', {
+                address: this.form.address,
+              })})
+          }
+        }
     }
 </script>
 
