@@ -1,5 +1,5 @@
 <template>
-    <v-card>
+    <v-card height="100%">
         <v-toolbar color="bg-primary" dark>
             <img :src="require('@/assets/safebag_dark.png')" height="100%" width="15%"/>
             <v-spacer></v-spacer>

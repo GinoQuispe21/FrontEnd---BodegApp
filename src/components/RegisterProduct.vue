@@ -9,18 +9,13 @@
                         <div class="left right">
                             <label for="name">Nombre de producto</label>
                             <div class="paddin"></div>
-                            <input id="name" type="text"  />
-                        </div>
-                        <div class="left right">
-                            <label for="code">Código</label>
-                            <div class="paddin"></div>
-                            <input id="code" type="text" disabled placeholder="P00001"/>
+                            <input v-model="productName" id="name" type="text"  />
                         </div>
                             <div></div>
                             <div class="left right">
                                 <label for="provee">Proveedor</label>
                                 <div class="paddin"></div>
-                                <input id="provee" type="text"/>
+                                <input v-model="providerName" id="provee" type="text"/>
                             </div>
                             <div class="left right">
                                 <label for="v_date">Fecha de Vigencia</label>
@@ -31,16 +26,16 @@
                             <div class="left right">
                                 <label for="pc">Precio Compra</label>
                                 <div class="paddin"></div>
-                                <input id="pc" type="number"  />
+                                <input v-model="purchasePrice" id="pc" type="number"  />
                             </div>
                             <div class="left right">
                                 <label for="pv">Precio Venta</label>
                                 <div class="paddin"></div>
-                                <input id="pv" type="number"  />
+                                <input v-model="salePrice" id="pv" type="number"  />
                             </div>
                             <div style="padding-top: 3rem"></div>
                             <div class="text-right">
-                                <b-btn class="btt">Registrar</b-btn>
+                                <b-btn @click="postProduct()" class="btt">Registrar</b-btn>
                             </div>
                         </form>
                     </div>
@@ -51,8 +46,35 @@
 </template>
 
 <script>
+    import { baseURL } from '@/baseURL';
     export default {
-        name: "RegisterProduct"
+        name: "RegisterProduct",
+        data: ()=>{
+            return {
+                productName : null,
+                providerName : null,
+                purchasePrice : null,
+                salePrice : null,
+
+            }
+        },
+        methods:{
+            postProduct(){
+                alert("funca")
+                this.axios.post(baseURL + 'products', {
+                    productName : this.productName,
+                    providerName : this.providerName,
+                    purchasePrice : this.purchasePrice,
+                    salePrice : this.salePrice,
+
+                })
+                    .then((responseUser) => {
+                        //Create Product
+                        this.axios.post(baseURL + 'products' + responseUser.data.id, {
+                            address: this.form.address,
+                        })})
+            }
+        }
     }
 </script>
 
