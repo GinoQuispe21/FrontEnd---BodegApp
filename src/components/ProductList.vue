@@ -1,26 +1,13 @@
 <template>
     <v-card>
         <div class="container no-gutters ass">
-            <div>
-                <h1>Lista de Productos</h1>
-            </div>
             <div style="padding-right: 150px" class="row justify-content-center align-items-center register_body">
                 <div style="border-radius: 15px"  class="col-8 text-info bg-primary row justify-content-center">
-                    <div class="col-12">
-                        <form>
-                            <div class="left right">
-                                <label for="product">Buscar Producto</label>
-                                <div class="paddin"></div>
-                                <input id="product" type="text" name="b_product" placeholder="N.producto"/>
-                            </div>
-                            <div class="left right">
-                                <b-btn>Buscar</b-btn>
-                            </div>
-                        </form>
-                    </div>
-                    <div style="padding: 3rem"></div>
 
                     <div class="col-12">
+                        <div class = "title" style="text-align: center">
+                          <h1>Lista de Productos</h1>
+                        </div>
                         <div class="row justify-content-center">
                             <div class="row justify-content-center col-3">
                                 <div class="col-auto">
@@ -150,9 +137,9 @@
         display: inline;
         height: 70vh;
         width: 70vw;
-    p{
-        color: #ff775c;
-    }
+        p{
+            color: #ff775c;
+        }
     }
     .vl{
         border-left: 1px solid #ff775c;
@@ -177,5 +164,8 @@
         padding-left: 0.75rem;
         background-color: white;
 
+    }
+    .title{
+      color: #a6a8aa;
     }
 </style>

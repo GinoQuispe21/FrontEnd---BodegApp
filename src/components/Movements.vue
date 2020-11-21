@@ -58,8 +58,12 @@
                                 <div>
                                     <label for="pay">Pagar</label>
                                 </div>
-                                <input id="pay" type="number" step="0.1" class="aaaa"/>
-                                <input type="submit" value="Aceptar" style="padding-left: 1rem" class="bn">
+                                <input v-model="payment" id="pay" type="number" step="0.1" class="aaaa"/>
+                                <div>
+                                    <label for="pay">Fecha de Pago</label>
+                                </div>
+                                <input v-model="generate_date" id="date" type="text" step="0.1" class="aaaa"/>
+                                <input @click="postPayment()" type="submit" value="Aceptar" style="padding-left: 1rem" class="bn">
                             </div>
                         </div>
                     </div>
@@ -89,7 +93,9 @@
        name: "ClientList",
        data: ()=> {
            return{
-               clientAc: [],
+             clientAc: [],
+             payment : null,
+             generate_date : null
            }
        },
        mounted() {
@@ -101,7 +107,12 @@
            console.log(this.clientAc.credit)
        },
        methods:{
-
+         postPayment(){
+           this.axios.post(baseURL + 'customerAccounts/1/payments', {
+             generate_date : this.generate_date,
+             payment: parseFloat(this.payment)
+           })
+         }
        }
    }
 </script>

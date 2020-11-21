@@ -1,28 +1,13 @@
 <template>
     <v-card>
         <div class="container no-gutters ass">
-            <div>
-                <h1>Lista de Cliente</h1>
-            </div>
             <div style="padding-right: 150px" class="row justify-content-center align-items-center register_body">
                 <div style="border-radius: 15px"  class="col-9 text-info bg-primary row justify-content-center">
                     <div class="col-12">
-                        <form>
-                            <div class="left right">
-                                <label for="client">DNI</label>
-                                <div class="paddin"></div>
-                                <select id="client" name="states[]" >
-                                    <option value="1">140301</option>
-                                    <option value="2">210593</option>
-                                </select>
-                            </div>
-                            <div class="left right">
-                                <b-btn>Buscar</b-btn>
-                            </div>
-                        </form>
                     </div>
-                    <div style="padding: 3rem"></div>
-
+                    <div class = "title">
+                      <h1>Lista de Cliente</h1>
+                    </div>
                     <div class="col-12">
                         <div class="row justify-content-center">
                             <div class="row justify-content-center col-3">
@@ -162,6 +147,9 @@
        background-color: #ffce00;
         opacity: 0.90;
         height: auto;
+    }
+    .title{
+      color: #a6a8aa;
     }
 
 </style>

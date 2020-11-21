@@ -86,6 +86,42 @@
                                 <p><small>Tipo año: Ordinal</small></p>
                             </label><br>
                             </div>
+                          <div class="bg-primary left right selection">
+                            <input @click="Paquete4()" type="radio" id="3" name="gender" value="male">
+                            <label for="4">
+                              <h1>Personalizado</h1>
+                              <div>
+                                  <label class="left right3" for="name">Tasa</label>
+                                  <div class="paddin"></div>
+                                  <input class ="inputpers" v-model="interestRate" id="interesRate" type="text"/>
+                              </div><br>
+                              <div>
+                                  <label class="left right3" for="name">Tipo de Interes</label>
+                                  <div class="paddin"></div>
+                                  <input class ="inputpers" v-model="interestRateType" id="interesRateType" type="text"/>
+                              </div><br>
+                              <div>
+                                <label class="left right3" for="name">Periodo</label>
+                                <div class="paddin"></div>
+                                <input class ="inputpers" v-model="interestRatePeriod" id="interesRatePeriod" type="text"/>
+                              </div><br>
+                              <div>
+                                <label class="left right3" for="name">Capitalizacion</label>
+                                <div class="paddin"></div>
+                                <input class ="inputpers" v-model="compounding" id="compouding" type="text"/>
+                              </div><br>
+                              <div>
+                                <label class="left right3" for="name">Credito</label>
+                                <div class="paddin"></div>
+                                <input class ="inputpers" v-model="credit" id="credit" type="text"/>
+                              </div><br>
+                              <div>
+                                <label class="left right3" for="name">Tipo Año</label>
+                                <div class="paddin"></div>
+                                <input class ="inputpers" v-model="typeYear" id="typeYear" type="text"/>
+                              </div><br>
+                            </label><br>
+                          </div>
                         </form>
                     </div>
                 </div>
@@ -207,6 +243,16 @@
     .selection{
         border-radius: 25px;
         padding: 2rem;
+    }
+    .inputpers{
+        width: 50%;
+        height: 30px;
+    }
+    .right3{
+      padding-right: 1vw;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      color: #ff775c;
     }
     input{
         width: 100%;
