@@ -65,7 +65,16 @@
 <script>
     export default {
         name: "LogIn",
+        data(){
+            return{
+            user: null,
+            show3: null,
+            password: null,
+            }
+        },
+
     }
+
 </script>
 
 <style lang="scss">

@@ -96,7 +96,7 @@
                         </li>
                     </div>
                     <div class=" col-12">
-                        <li v-for="(sale, index) in items" :key="index" class="table">
+                        <li v-for="(sale, index) in sales" :key="index" class="table">
                             <div class="row justify-content-center col-12">
                                 <div class="row justify-content-center col-3">
                                     <div class="col-auto">
@@ -154,20 +154,23 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                // Note `isActive` is left out and will not appear in the rendered table
-                name: "RegisterSale",
-                fields: ['codigo', 'producto', 'cantidad', 'precio_unitario', 'importe'],
-                items: [
-                    { isActive: true, codigo: 'SW1A', producto: 'Chocolate Moto Moto', cantidad: 2, precio_unitario: 25.00, importe: 12.00 },
-                    { isActive: true, codigo: 'EMPE', producto: 'Chocolate Tana', cantidad: 5, precio_unitario: 23.00, importe: 18.00 },
-                ],
-                labels:[
-                    { isActive: true, codigo: 'Código', producto: 'Producto', cantidad: 'Cantidad', precio_unitario: 'Pre. Unitario', importe: 'Importe' },
-                ]
+    import { baseURL } from '@/baseURL';
+    export default  {
+        name: "RegisterList",
+        data: ()=> {
+            return{
+                sales: []
             }
+        },
+        mounted() {
+            console.log()
+            this.axios.get(baseURL + 'products')
+                .then(response =>{
+                    this.products = response.data.content;
+                    console.log(response);
+                })
+        },
+        methods:{
         }
     }
 </script>

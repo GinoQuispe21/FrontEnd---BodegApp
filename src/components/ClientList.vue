@@ -52,29 +52,29 @@
                         <hr>
                     </div>
                     <div class="col-12">
-                        <li v-for="(client, index) in items" :key="index" class="table">
+                        <li v-for="(client, index) in clients" :key="index" class="table">
                             <div class="row justify-content-center">
                             <div class="row justify-content-center col-3">
                                 <div class="col-auto">
-                                    <p>{{client.DNI}}</p>
+                                    <p>{{client.dni}}</p>
                                 </div>
                             </div>
                                 <div class="vl"></div>
                             <div class="row justify-content-center col-3">
                                 <div class="col-auto">
-                                    <p>{{client.nombre}}</p>
+                                    <p>{{client.customerName}}</p>
                                 </div>
                             </div>
                                 <div class="vl"></div>
                             <div class="row justify-content-center col-3">
                                 <div class="col-auto">
-                                    <p>{{client.apellido}}</p>
+                                    <p>{{client.customerLastname}}</p>
                                 </div>
                             </div>
                                 <div class="vl"></div>
                             <div class="row justify-content-center col-3">
                                 <div class="col-auto">
-                                    <b-btn>Eliminar</b-btn>
+                                    <b-btn @click="deleteClient(client)">Eliminar</b-btn>
                                 </div>
                             </div>
                             </div>
@@ -95,22 +95,29 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                // Note `isActive` is left out and will not appear in the rendered table
-                name: "ClientList",
-                fields: ['DNI', 'nombre', 'apellido'],
-                items: [
-                    { isActive: true, DNI: 140301, nombre: 'Juan', apellido: 'Leyva' },
-                    { isActive: true, DNI: 210593, nombre: 'Mafer', apellido: 'Calle' },
-                ]
+    import { baseURL } from '@/baseURL';
+    export default  {
+        name: "ClientList",
+        data: ()=> {
+            return{
+                clients: [],
+                client: null
             }
         },
+        mounted() {
+            console.log()
+            this.axios.get(baseURL + 'users/1/customersActives')
+                .then(response =>{
+                    this.clients = response.data.content;
+                    console.log(response);
+                })
+        },
         methods:{
-            DNI_filter(name, l_name){
-                let fulllname = name + ' ' + l_name;
-                alert(fulllname)
+            deleteClient(client){
+                this.client = client;
+                client.state = 1;
+                this.axios.put(baseURL + 'users/1/customers/' + client.id, client).then(response =>{
+                    console.log(response)})
             }
         }
     }

@@ -55,29 +55,29 @@
                         <hr>
                     </div>
                     <div class="col-12">
-                        <li v-for="(product, index) in items" :key="index" class="table">
+                        <li v-for="(product, index) in products" :key="index" class="table">
                             <div class="row justify-content-center">
                                 <div class="row justify-content-center col-3">
                                     <div class="col-auto">
-                                        <p>{{product.codigo}}</p>
+                                        <p>{{product.id}}</p>
                                     </div>
                                 </div>
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-3">
                                     <div class="col-auto">
-                                        <p>{{product.nombre}}</p>
+                                        <p>{{product.productName}}</p>
                                     </div>
                                 </div>
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-2">
                                     <div class="col-auto">
-                                        <p>{{product.p_compra}}</p>
+                                        <p>{{product.purchasePrice}}</p>
                                     </div>
                                 </div>
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-2">
                                     <div class="col-auto">
-                                        <p>{{product.p_venta}}</p>
+                                        <p>{{product.salePrice}}</p>
                                     </div>
                                 </div>
                                 <div class="vl"></div>
@@ -104,23 +104,23 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                // Note `isActive` is left out and will not appear in the rendered table
-                name: "ProductList",
-                fields: ['codigo', 'nombre', 'p_compra', 'p_compra'],
-                items: [
-                    { isActive: true, codigo: 'CO0001', nombre: 'Chocolate Moto Moto', p_compra: 25.00, p_venta: 22.00 },
-                    { isActive: true, codigo: 'CO0003', nombre: 'Chocolate Tana', p_compra: 21.00, p_venta: 17.00 },
-                ]
+    import { baseURL } from '@/baseURL';
+    export default  {
+        name: "ProductList",
+        data: ()=> {
+            return{
+                products: []
             }
         },
+        mounted() {
+            console.log()
+            this.axios.get(baseURL + 'products')
+                .then(response =>{
+                    this.products = response.data.content;
+                    console.log(response);
+                })
+        },
         methods:{
-            DNI_filter(name, l_name){
-                let fulllname = name + ' ' + l_name;
-                alert(fulllname)
-            }
         }
     }
 </script>

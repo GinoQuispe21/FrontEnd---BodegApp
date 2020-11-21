@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div style="padding-left: 4rem" class="left">
-                        <b-table striped hover :items="items" :fields="fields" ></b-table>
+
                     </div>
                     <div class="text-right">
                         <div style="padding-top: 30rem"></div>
@@ -83,19 +83,27 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                // Note `isActive` is left out and will not appear in the rendered table
-                name: "Movements",
-                fields: ['tipo', 'fecha', 'código', 'total'],
-                items: [
-                    { isActive: true, código: 1234, fecha: '10/03/20', tipo: 'Compra', total: 250.000 },
+   import {baseURL} from "@/baseURL";
 
-                ]
-            }
-        }
-    }
+   export default  {
+       name: "ClientList",
+       data: ()=> {
+           return{
+               clientAc: [],
+           }
+       },
+       mounted() {
+           this.axios.get(baseURL + 'customers/1/customerAccounts')
+               .then(response =>{
+                   this.clientAc = response.data.content;
+                   console.log(response);
+               })
+           console.log(this.clientAc.credit)
+       },
+       methods:{
+
+       }
+   }
 </script>
 
 <style scoped>

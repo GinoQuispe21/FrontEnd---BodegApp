@@ -103,6 +103,9 @@
             RegisterProduct,
             RegisterClient,
             ProductList, ClientList, RegisterSale, Movements, ChangePassword, UserData},
+       mounted(){
+
+       }
     }
 </script>
 
