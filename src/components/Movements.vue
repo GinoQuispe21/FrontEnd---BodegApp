@@ -7,11 +7,15 @@
                     <div style="align-items: center">
                         <form class="text-info left right">
                             <div class="left right">
-                                <div style="padding-top: 2rem"></div>
                                 <div>
                                   <label for="pay">Cliente</label>
                                 </div>
                                 <input v-model="dni" id="dni" type="number" step="0.1" class="aaaa"/>
+                                <div class="row justify-content-center col-2">
+                                  <div class="col-auto">
+                                    <b-btn>Buscar</b-btn>
+                                  </div>
+                                </div>
                             </div>
                             <div class="left right">
                                 <label for="debt">Deuda</label>
@@ -25,14 +29,14 @@
                             </div>
                         </form>
                     </div>
-                    <div class="bg-primary body_slam left" style="padding-right: 30%">
+                    <div class="bg-primary body_slam left" style="padding-right: 10%">
+                        <div class="text-info" style="text-align: center; padding-left: 90px">
+                            <h1 class="cust-name">{{customer.customerName}} {{customer.customerLastname}}</h1>
+                        </div>
+                        <!-- ACA NO FUNCIONA EL CLIENTE CA-->
                         <div class="text-info" style="text-align: center; padding-left: 200px">
-                            <h1>Leyva Calle</h1>
                         </div>
                         <div style="padding-top: 2rem" class="text-secondary">
-                            <div>
-                                <small>Tasa: 25%</small>
-                            </div>
                             <div>
                                 <small>Tipo Interés: Nominal</small>
                             </div>
@@ -57,21 +61,19 @@
                                 <input v-model="generated_date" id="date" type="text" step="0.1" class="aaaa"/>
                                 <input @click="postPayment()" type="submit" value="Aceptar" style="padding-left: 1rem" class="bn">
                             </div>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <div style="padding-top: 30rem"></div>
-                        <div>
-                            <label for="gain">Ganancia</label>
-                        </div>
-                        <input id="gain" type="number" step="0.1" class="gain"/>
-                        <div style="padding-top: 2rem">
-                        <b-btn>Imprimir Boletas</b-btn>
+                          <div class="text-right">
+                            <div style="padding-left: 10rem">
+                              <label for="gain">Ganancia</label>
+                            </div>
+                            <input id="gain" type="number" step="0.1" placeholder="25000" class="gain"/>
+                            <div style="padding-top: 2rem">
+                              <b-btn class = "colorbtn">Imprimir Boletas</b-btn>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
             </div>
-          <div style="padding-bottom: 3rem"></div>
           <div class="tasa">
             <form>
               <div class="bg-primary left right selection">
@@ -219,6 +221,7 @@
        data: ()=> {
            return{
              dni: null,
+             customer: null,
              clientAc: [],
              orders: [],
              payments: [],
@@ -227,14 +230,14 @@
            }
        },
        mounted() {
-          this.axios.get(baseURL + 'users/1/customersDni/45345621')
+           this.axios.get(baseURL + 'users/1/customersDni/45345621')
                .then(response => {
-                   this.customer = response.data.content;
-                   console.log(response);
-                   this.axios.get(baseURL + 'customers/'+ response.data.id+'/customerAccounts').then(response1 => {
-                       this.clientAc = response1.data.content;
-                       console.log(response1);
-                   })
+                 this.customer = response.data;
+                 console.log(response);
+                 this.axios.get(baseURL + 'customers/'+ response.data.id+'/customerAccounts').then(response1 => {
+                   this.clientAc = response1.data.content;
+                   console.log(response1);
+                 })
                });
           console.log(this.clientAc.credit);
           this.axios.get(baseURL + 'customers/1/orders')
@@ -251,6 +254,9 @@
                })
        },
        methods:{
+         Assign(dni){
+           this.dni = dni;
+         },
          postPayment(){
            this.axios.post(baseURL + 'customerAccounts/1/payments', {
              generated_date : this.generated_date,
@@ -364,5 +370,16 @@
     }
     .linea {
       display: inline-block;
+    }
+    .cliente{
+      height: 10Vh;
+    }
+    .gain{
+      color: #ff775c;
+      border: #a6a8aa solid;
+      width: 10rem;
+    }
+    .colorbtn{
+      color:#28201e;
     }
 </style>
