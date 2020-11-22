@@ -1,24 +1,17 @@
 <template>
     <v-card>
         <div class="container no-gutters ass">
-            <h1>Movimientos</h1>
+            <h1 class="Title">Movimientos</h1>
             <div class="row justify-content-center align-items-center register_body">
                 <div class=" col-auto ">
                     <div style="align-items: center">
                         <form class="text-info left right">
                             <div class="left right">
-                                <label for="client">Cliente</label>
-                                <div class="paddin"></div>
-                                <select id="client" type="number" name="client">
-                                    <option value="1">140301</option>
-                                </select>
-                            </div>
-                            <div class="left right">
-                                <label for="r_consult">Cliente</label>
-                                <div class="paddin"></div>
-                                <select id="r_consult" type="text" name="consult">
-                                    <option value="1">Prueba</option>
-                                </select>
+                                <div style="padding-top: 2rem"></div>
+                                <div>
+                                  <label for="pay">Cliente</label>
+                                </div>
+                                <input v-model="dni" id="dni" type="number" step="0.1" class="aaaa"/>
                             </div>
                             <div class="left right">
                                 <label for="debt">Deuda</label>
@@ -32,10 +25,9 @@
                             </div>
                         </form>
                     </div>
-                    <div class="bg-primary body_slam left">
-                        <div class="text-info">
+                    <div class="bg-primary body_slam left" style="padding-right: 30%">
+                        <div class="text-info" style="text-align: center; padding-left: 200px">
                             <h1>Leyva Calle</h1>
-                            <small>Juan Alonso</small>
                         </div>
                         <div style="padding-top: 2rem" class="text-secondary">
                             <div>
@@ -53,7 +45,7 @@
                             <div>
                                 <small>Registro: 7/11/20</small>
                             </div>
-                            <div>
+                            <div class = "left right">
                                 <div style="padding-top: 2rem"></div>
                                 <div>
                                     <label for="pay">Pagar</label>
@@ -62,13 +54,10 @@
                                 <div>
                                     <label for="pay">Fecha de Pago</label>
                                 </div>
-                                <input v-model="generate_date" id="date" type="text" step="0.1" class="aaaa"/>
+                                <input v-model="generated_date" id="date" type="text" step="0.1" class="aaaa"/>
                                 <input @click="postPayment()" type="submit" value="Aceptar" style="padding-left: 1rem" class="bn">
                             </div>
                         </div>
-                    </div>
-                    <div style="padding-left: 4rem" class="left">
-
                     </div>
                     <div class="text-right">
                         <div style="padding-top: 30rem"></div>
@@ -82,6 +71,142 @@
                     </div>
                 </div>
             </div>
+          <div style="padding-bottom: 3rem"></div>
+          <div class="tasa">
+            <form>
+              <div class="bg-primary left right selection">
+                <div style="border-radius: 0px"  class="col-13 text-info bg-primary row justify-content-center" >
+                  <div class="col-12">
+                    <div class = "title" style="text-align: center">
+                      <h1>Ordenes</h1>
+                    </div>
+                    <div class="row justify-content-center">
+                      <div class="row justify-content-center col-3">
+                        <div class="col-auto">
+                          <p>Código</p>
+                        </div>
+                      </div>
+                      <div class="vl"></div>
+                      <div class="row justify-content-center col-3">
+                        <div class="col-auto">
+                          <p>Fecha</p>
+                        </div>
+                      </div>
+                      <div class="vl"></div>
+                      <div class="row justify-content-center col-2">
+                        <div class="col-auto">
+                          <p>Total</p>
+                        </div>
+                      </div>
+                      <div class="vl"></div>
+                      <div class="row justify-content-center col-2">
+                        <div class="col-auto">
+                          <p>Act</p>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                  <div class="col-12">
+                    <li v-for="(order, index) in orders" :key="index" class="table">
+                      <div class="row justify-content-center">
+                        <div class="row justify-content-center col-3">
+                          <div class="col-auto">
+                            <p class ="subt">{{order.id}}</p>
+                          </div>
+                        </div>
+                        <div class="vl"></div>
+                        <div class="row justify-content-center col-3">
+                          <div class="col-auto">
+                            <p class ="subt">{{ order.generated_date}}</p>
+                          </div>
+                        </div>
+                        <div class="vl"></div>
+                        <div class="row justify-content-center col-2">
+                          <div class="col-auto">
+                            <p class ="subt">{{order.payment}}</p>
+                          </div>
+                        </div>
+                        <div class="vl"></div>
+                        <div class="row justify-content-center col-2">
+                          <div class="col-auto">
+                            <b-btn @click="deleteProduct(order.id)">Imprimir</b-btn>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                    </li>
+                  </div>
+                </div>
+              </div>
+              <div ></div>
+              <div class="bg-primary left right selection">
+                <div style="border-radius: 0px"  class="col-14 text-info bg-primary row justify-content-center" >
+                  <div class="col-12">
+                    <div class = "title" style="text-align: center">
+                      <h1>Pagos</h1>
+                    </div>
+                    <div class="row justify-content-center">
+                      <div class="row justify-content-center col-3">
+                        <div class="col-auto">
+                          <p>Código</p>
+                        </div>
+                      </div>
+                      <div class="vl"></div>
+                      <div class="row justify-content-center col-3">
+                        <div class="col-auto">
+                          <p>Fecha</p>
+                        </div>
+                      </div>
+                      <div class="vl"></div>
+                      <div class="row justify-content-center col-2">
+                        <div class="col-auto">
+                          <p>Total</p>
+                        </div>
+                      </div>
+                      <div class="vl"></div>
+                      <div class="row justify-content-center col-2">
+                        <div class="col-auto">
+                          <p>Act</p>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                  </div>
+                  <div class="col-12">
+                    <li v-for="(pago, index) in payments" :key="index" class="table">
+                      <div class="row justify-content-center">
+                        <div class="row justify-content-center col-3">
+                          <div class="col-auto">
+                            <p class ="subt">{{pago.id}}</p>
+                          </div>
+                        </div>
+                        <div class="vl"></div>
+                        <div class="row justify-content-center col-3">
+                          <div class="col-auto">
+                            <p class ="subt">{{ pago.generated_date}}</p>
+                          </div>
+                        </div>
+                        <div class="vl"></div>
+                        <div class="row justify-content-center col-2">
+                          <div class="col-auto">
+                            <p class ="subt">{{pago.payment}}</p>
+                          </div>
+                        </div>
+                        <div class="vl"></div>
+                        <div class="row justify-content-center col-2">
+                          <div class="col-auto">
+                            <b-btn @click="deleteProduct(order.id)">Imprimir</b-btn>
+                          </div>
+                        </div>
+                      </div>
+                      <hr>
+                    </li>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
     </v-card>
 </template>
@@ -94,25 +219,57 @@
        data: ()=> {
            return{
              clientAc: [],
+             orders: [],
+             payments: [],
              payment : null,
-             generate_date : null
+             generated_date : null
            }
        },
        mounted() {
            this.axios.get(baseURL + 'customers/1/customerAccounts')
                .then(response =>{
-                   this.clientAc = response.data.content;
-                   console.log(response);
+                 this.clientAc = response.data.content;
+                 console.log(response);
                })
-           console.log(this.clientAc.credit)
+           console.log(this.clientAc.credit);
+           this.axios.get(baseURL + 'customers/1/orders')
+               .then(response =>{
+                 this.orders = response.data.content;
+                 this.formatDateOrders();
+                 console.log(response);
+               });
+           this.axios.get(baseURL + 'customerAccounts/1/payments')
+               .then(response =>{
+                 this.payments = response.data.content;
+                 this.formatDatePayments();
+                 console.log(response);
+               })
        },
        methods:{
          postPayment(){
            this.axios.post(baseURL + 'customerAccounts/1/payments', {
-             generate_date : this.generate_date,
+             generated_date : this.generated_date,
              payment: parseFloat(this.payment)
            })
-         }
+         },
+         formatDateOrders() {
+           for (let i = 0; i < this.orders.length; i++) {
+             //2000-12-11 19:00:00
+             let date = this.orders[i].generated_date;
+             let splitDate = date.split("-")
+             let formatDate = splitDate[2][0] + splitDate[2][1] + '-' + splitDate[1] + '-' + splitDate[0];
+             this.orders[i].generated_date = formatDate;
+           }
+         },
+         formatDatePayments() {
+           for (let i = 0; i < this.payments.length; i++) {
+             //2000-12-11 19:00:00
+             let date = this.payments[i].generated_date;
+             let splitDate = date.split("-")
+             let formatDate = splitDate[2][0] + splitDate[2][1] + '-' + splitDate[1] + '-' + splitDate[0];
+             this.payments[i].generated_date = formatDate;
+           }
+         },
        }
    }
 </script>
@@ -152,11 +309,55 @@
         border: #28201e solid;
         width: 10rem;
     }
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button{
-    -webkit-appearance: none;
-    margin: 0;
-}
-#pay{
-    z-index:99999;
-}
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button{
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    #pay{
+        z-index:99999;
+    }
+
+    .register_body{
+      height: 100vh;
+      width:  100vw;
+    }
+    .left{
+      float: left;
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+    }
+    .right{
+      padding-right: 5vw;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    .vl{
+      border-left: 1px solid #ff775c;
+      opacity: 0.90;
+      height: auto;
+    }
+    select{
+      color: #ff775c;
+
+    }
+    hr{
+      background-color: #ffce00;
+      opacity: 0.90;
+      height: auto;
+    }
+    .title{
+      color: #a6a8aa;
+    }
+    .Title{
+      color: #28201e;
+      text-align: center;
+      padding-top: 40px;
+    }
+    .subt{
+      color: #a6a8aa;
+    }
+    .linea {
+      display: inline-block;
+    }
 </style>
