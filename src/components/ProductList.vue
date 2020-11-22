@@ -70,6 +70,9 @@
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-2">
                                     <div class="col-auto">
+                                        <div style="padding-bottom: 0.5rem">
+                                        <b-btn @click="editProduct(product.id)">Editar</b-btn>
+                                        </div>
                                         <b-btn @click="deleteProduct(product.id)">Eliminar</b-btn>
                                     </div>
                                 </div>
@@ -111,8 +114,14 @@
             deleteProduct(productid){
               this.axios.delete(baseURL + 'products/' + productid).then(response =>{
                 console.log(response)})
+            },
+            editProduct(productid){
+                this.$store.commit('setProductid', productid )
+                console.log(this.$store.getters.getProductid)
+                alert("Producto " + productid + " listo para editar, seleccione Editar producto para proseguir")
             }
         }
+
     }
 </script>
 
