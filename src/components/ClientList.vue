@@ -59,6 +59,9 @@
                                 <div class="vl"></div>
                             <div class="row justify-content-center col-3">
                                 <div class="col-auto">
+                                    <div style="padding-bottom: 0.5rem">
+                                        <b-btn @click="editClient(client.id)">Editar</b-btn>
+                                    </div>
                                     <b-btn @click="deleteClient(client)">Eliminar</b-btn>
                                 </div>
                             </div>
@@ -103,6 +106,11 @@
                 client.state = 1;
                 this.axios.put(baseURL + 'users/1/customers/' + client.id, client).then(response =>{
                     console.log(response)})
+            },
+            editClient(clientid){
+                this.$store.commit('setClientid', clientid )
+                console.log(this.$store.getters.getClientid)
+                alert("Cliente " + clientid + " listo para editar, seleccione Editar Cliente para proseguir")
             }
         }
     }

@@ -6,6 +6,7 @@ import bootstrap_vue from 'bootstrap-vue'
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import Vuex from 'vuex';
+import store from './store'
 
 Vue.config.productionTip = false
 Vue.use(bootstrap_vue)
@@ -15,5 +16,6 @@ new Vue({
   router,
   vuetify,
   bootstrap_vue,
+  store,
   render: h => h(App)
 }).$mount('#app')
