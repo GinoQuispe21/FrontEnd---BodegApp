@@ -5,36 +5,33 @@
             <div class="row justify-content-center align-items-center register_body">
                 <div class=" col-auto">
                     <div class="help">
-                    <div class="row col-12">
+                    <div class="row col-13">
                         <form>
                             <div class="left right">
                                 <label for="dni">DNI</label>
-                                <div class="paddin"></div>
-                                <select id="dni" type="number" name="client" class="c_select">
-                                    <option value="1">73240791</option>
-                                </select>
+                                <input v-model="dni" id="dni" type="number" step="0.1" class="aaaa"/>
                             </div>
                             <div class="left right">
                                 <label for="name">Nombre y Apellido</label>
                                 <div class="paddin"></div>
-                                <input id="name" type="text" disabled placeholder="Juan Alonso Leyva Calle"/>
+                                <input class = "inputtext" id="name" type="text" disabled placeholder="Juan Alonso Leyva Calle"/>
                             </div>
                             <div class="left right">
                                 <label for="debt">Deuda</label>
                                 <div class="paddin"></div>
-                                <input id="debt" type="number" disabled placeholder="25000"/>
+                                <input class = "inputnumb" id="debt" type="number" disabled placeholder="25000"/>
                             </div>
-                            <div class="left right">
-                                <label for="available">Disponible</label>
-                                <div class="paddin"></div>
-                                <input id="available" type="number" disabled placeholder="25000"/>
-                            </div>
+                          <div class="left right">
+                            <label for="debt">Deuda</label>
+                            <div class="paddin"></div>
+                            <input class = "inputnumb" id="debt" type="number" disabled placeholder="25000"/>
+                          </div>
                         </form>
                     </div>
-                    <div class="row col-12">
+                    <div class="row col-13">
                         <form>
                             <div class="left right">
-                                <label for="product">DNI</label>
+                                <label for="product">Producto</label>
                                 <div class="paddin"></div>
                                 <select id="product" type="text" name="product" class="c_select">
                                     <option value="1">Chocolate Tana</option>
@@ -56,6 +53,10 @@
                                     <option value="1">Sí</option>
                                     <option value="2">No</option>
                                 </select>
+                            </div>
+                            <div class="left right">
+                                <label>Fecha</label>
+                                <input v-model="generated_date" id="genereted_date" type="text" step="0.1" class="aaaa"/>
                             </div>
                         </form>
                     </div>
@@ -139,11 +140,14 @@
                         <small>Total: </small>
                         </div>
                     </div>
+                    <div class="left right">
+                        <label>Monto de venta</label>
+                        <input v-model="payment" id="payment" type="number" step="0.1" class="aaaa"/>
+                    </div>
                     <div>
                         <div class="text-right butt">
-                            <b-btn>Registrar Venta</b-btn>
+                            <b-btn @click="postOrder()">Registrar Venta</b-btn>
                             <b-btn class="bg-danger">Canelar</b-btn>
-
                         </div>
                     </div>
                 </div>
@@ -156,10 +160,16 @@
 <script>
     import { baseURL } from '@/baseURL';
     export default  {
-        name: "RegisterList",
+        name: "RegisterSale",
         data: ()=> {
             return{
-                sales: []
+                customer : null,
+                sales: [],
+                products: [],
+                deliveries: [],
+                dni : null,
+                generated_date : null,
+                payment : null,
             }
         },
         mounted() {
@@ -168,9 +178,27 @@
                 .then(response =>{
                     this.products = response.data.content;
                     console.log(response);
+                });
+            this.axios.get(baseURL + 'deliveries')
+                .then(response =>{
+                    this.deliveries = response.data.content;
+                    console.log(response);
+                });
+            //Get By Dni
+            this.axios.get(baseURL + 'users/1/customersDni/'+this.dni)
+                .then(response => {
+                    this.customer = response.data.content;
+                    console.log(response);
                 })
         },
         methods:{
+            postOrder(){
+                //Cambiar customers 1 por id
+                this.axios.post(baseURL + 'customers/1/orders',{
+                    generated_date : this.generated_date,
+                    payment: parseFloat(this.payment)
+              })
+            }
         }
     }
 </script>
@@ -200,7 +228,8 @@
     .c_select{
         color: #ff775c;
         font-size: 0.85rem;
-
+        height: 100%;
+        width: 100%;
     }
     .table{
         list-style: none;
@@ -228,7 +257,7 @@
     .butt{
         color: #28201e;
     }
-    input{
+    .inputtext{
         width: 100%;
         height: 30px;
         border: #a6a8aa solid thin;
@@ -236,6 +265,23 @@
         color: #ff775c;
         padding-left: 0.75rem;
         background-color: white;
-
+    }
+    .inputnumb{
+        width: 50%;
+        height: 30px;
+        border: #a6a8aa solid thin;
+        border-radius: 10px;
+        color: #ff775c;
+        padding-left: 0.75rem;
+        background-color: white;
+    }
+    input{
+      width: 100%;
+      height: 30px;
+      border: #a6a8aa solid thin;
+      border-radius: 10px;
+      color: #ff775c;
+      padding-left: 0.75rem;
+      background-color: white;
     }
 </style>

@@ -218,6 +218,7 @@
        name: "ClientList",
        data: ()=> {
            return{
+             dni: null,
              clientAc: [],
              orders: [],
              payments: [],
@@ -226,23 +227,27 @@
            }
        },
        mounted() {
-           this.axios.get(baseURL + 'customers/1/customerAccounts')
-               .then(response =>{
-                 this.clientAc = response.data.content;
-                 console.log(response);
-               })
-           console.log(this.clientAc.credit);
-           this.axios.get(baseURL + 'customers/1/orders')
-               .then(response =>{
-                 this.orders = response.data.content;
-                 this.formatDateOrders();
-                 console.log(response);
+          this.axios.get(baseURL + 'users/1/customersDni/45345621')
+               .then(response => {
+                   this.customer = response.data.content;
+                   console.log(response);
+                   this.axios.get(baseURL + 'customers/'+ response.data.id+'/customerAccounts').then(response1 => {
+                       this.clientAc = response1.data.content;
+                       console.log(response1);
+                   })
                });
-           this.axios.get(baseURL + 'customerAccounts/1/payments')
+          console.log(this.clientAc.credit);
+          this.axios.get(baseURL + 'customers/1/orders')
                .then(response =>{
-                 this.payments = response.data.content;
-                 this.formatDatePayments();
-                 console.log(response);
+                   this.orders = response.data.content;
+                   this.formatDateOrders();
+                   console.log(response);
+               });
+          this.axios.get(baseURL + 'customerAccounts/1/payments')
+               .then(response =>{
+                   this.payments = response.data.content;
+                   this.formatDatePayments();
+                   console.log(response);
                })
        },
        methods:{
