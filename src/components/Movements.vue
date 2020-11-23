@@ -13,7 +13,7 @@
                                 <input v-model="dni" id="dni" type="number" step="0.1" class="aaaa"/>
                                 <div class="row justify-content-center col-2">
                                   <div class="col-auto">
-                                    <b-btn>Buscar</b-btn>
+                                    <b-btn @click="getCustomerByDni()">Buscar</b-btn>
                                   </div>
                                 </div>
                             </div>
@@ -29,7 +29,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="bg-primary body_slam left" style="padding-right: 10%">
+                    <div v-if="this.dni != null" class="bg-primary body_slam left" style="padding-right: 10%">
                         <div class="text-info" style="text-align: center; padding-left: 90px">
                             <h1 class="cust-name">{{customer.customerName}} {{customer.customerLastname}}</h1>
                         </div>
@@ -38,7 +38,7 @@
                         </div>
                         <div style="padding-top: 2rem" class="text-secondary">
                             <div>
-                                <small>Tipo Interés: Nominal</small>
+                                <p>{{clientAc.interestRate}}</p>
                             </div>
                             <div>
                                 <small>Periodo: Bimestral</small>
@@ -74,7 +74,7 @@
                     </div>
                 </div>
             </div>
-          <div class="tasa">
+          <div v-if="this.dni != null" class="tasa">
             <form>
               <div class="bg-primary left right selection">
                 <div style="border-radius: 0px"  class="col-13 text-info bg-primary row justify-content-center" >
@@ -230,32 +230,31 @@
            }
        },
        mounted() {
-           this.axios.get(baseURL + 'users/1/customersDni/45345621')
-               .then(response => {
-                 this.customer = response.data;
-                 console.log(response);
-                 this.axios.get(baseURL + 'customers/'+ response.data.id+'/customerAccounts').then(response1 => {
-                   this.clientAc = response1.data.content;
-                   console.log(response1);
-                 })
-               });
-          console.log(this.clientAc.credit);
-          this.axios.get(baseURL + 'customers/1/orders')
-               .then(response =>{
-                   this.orders = response.data.content;
-                   this.formatDateOrders();
-                   console.log(response);
-               });
-          this.axios.get(baseURL + 'customerAccounts/1/payments')
-               .then(response =>{
-                   this.payments = response.data.content;
-                   this.formatDatePayments();
-                   console.log(response);
-               })
+
        },
        methods:{
-         Assign(dni){
-           this.dni = dni;
+         getCustomerByDni(){
+           this.axios.get(baseURL + 'users/1/customersDni/'+this.dni)
+               .then(responseCustomer => {
+                 this.customer = responseCustomer.data;
+                 console.log(responseCustomer);
+                 this.axios.get(baseURL + 'customers/'+ responseCustomer.data.id+'/customerAccounts').then(responseCustomerAcoutn => {
+                   this.clientAc = responseCustomerAcoutn.data;
+                   console.log(responseCustomerAcoutn);
+                   this.axios.get(baseURL + 'customerAccounts/' + responseCustomerAcoutn.data.id + '/payments')
+                       .then(response =>{
+                         this.payments = response.data.content;
+                         this.formatDatePayments();
+                         console.log(response);
+                       })
+                 });
+                 this.axios.get(baseURL + 'customers/' + responseCustomer.data.id + '/orders')
+                     .then(response =>{
+                       this.orders = response.data.content;
+                       this.formatDateOrders();
+                       console.log(response);
+                     });
+               });
          },
          postPayment(){
            this.axios.post(baseURL + 'customerAccounts/1/payments', {

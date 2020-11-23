@@ -11,85 +11,95 @@
                                 <label for="dni">DNI</label>
                                 <input v-model="dni" id="dni" type="number" step="0.1" class="aaaa"/>
                             </div>
-                            <div class="left right">
-                                <label for="name">Nombre y Apellido</label>
-                                <div class="paddin"></div>
-                                <input class = "inputtext" id="name" type="text" disabled placeholder="Juan Alonso Leyva Calle"/>
+                            <div class="row justify-content-center col-2">
+                              <div class="col-auto">
+                                <b-btn @click="getCustomerByDni()">Buscar</b-btn>
+                              </div>
                             </div>
                             <div class="left right">
-                                <label for="debt">Deuda</label>
+                                <label>Nombre y Apellido</label>
                                 <div class="paddin"></div>
-                                <input class = "inputnumb" id="debt" type="number" disabled placeholder="25000"/>
+                                <input v-model="nombreCompleto"/>
+                            </div>
+                            <div class="left right">
+                                <label>Deuda</label>
+                                <div class="paddin"></div>
+                                <input v-model="deuda"/>
                             </div>
                           <div class="left right">
-                            <label for="debt">Deuda</label>
+                            <label>Disponible</label>
                             <div class="paddin"></div>
-                            <input class = "inputnumb" id="debt" type="number" disabled placeholder="25000"/>
+                            <input v-model="disponible"/>
                           </div>
                         </form>
                     </div>
                     <div class="row col-13">
-                        <form>
+                        <b-form>
                             <div class="left right">
-                                <label for="product">Producto</label>
+                                <label>Producto</label>
                                 <div class="paddin"></div>
-                                <select id="product" type="text" name="product" class="c_select">
-                                    <option value="1">Chocolate Tana</option>
-                                    <option value="2">Chocolate Moto Moto</option>
-                                </select>
+                               <b-form-group>
+                                  <b-form-select v-model="pN" id="product" type="text" name="product" class="c_select" :options="productsName">
+                                  </b-form-select>
+                               </b-form-group>
                             </div>
                             <div class="left right">
-                                <label for="stock">Cantidad</label>
+                                <label>Cantidad</label>
                                 <div class="paddin"></div>
-                                <input id="stock" type="number" onkeydown="return false"/>
+                                <input v-model="cantidad"  step="0.1" class="aaaa"/>
                             </div>
                             <div style="padding-top: 2.4rem" class="left right">
-                                <b-btn>Añadir</b-btn>
+                                <b-btn @click="AnanirCarrito()">Añadir</b-btn>
                             </div>
                             <div class="left right">
-                                <label for="del">Delivery</label>
+                                <label>Delivery</label>
                                 <div class="paddin"></div>
-                                <select id="del" type="text" name="delivery" class="c_select">
-                                    <option value="1">Sí</option>
-                                    <option value="2">No</option>
-                                </select>
+                                <b-form-group>
+                                    <b-form-select v-model="dN" id="del" type="text" name="delivery" class="c_select" :options="deliveriesName">
+                                    </b-form-select>
+                                </b-form-group>
+                                <div class="row justify-content-center col-2">
+                                  <div class="col-auto">
+                                    <b-btn @click="AsignarDelivery()">Aceptar</b-btn>
+                                  </div>
+                                </div>
                             </div>
                             <div class="left right">
                                 <label>Fecha</label>
                                 <input v-model="generated_date" id="genereted_date" type="text" step="0.1" class="aaaa"/>
                             </div>
-                        </form>
+                        </b-form>
                     </div>
                     <div class=" col-12">
-                        <li v-for="(sale, index) in labels" :key="index" class="table2">
+                        <li v-for="(c, index) in cart" :key="index" class="table2">
                             <div class="row justify-content-center col-12">
                                 <div class="row justify-content-center col-3">
                                     <div class="col-auto">
-                                        <p>{{sale.codigo}}</p>
+                                        <p>{{c.id}}</p>
                                     </div>
                                 </div>
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-3">
                                     <div class="col-auto">
-                                        <p>{{sale.producto}}</p>
+                                        <p>{{c.producto}}</p>
                                     </div>
                                 </div>
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-2">
                                     <div class="col-auto">
-                                        <p>{{sale.precio_unitario}}</p>
+                                        <p>{{c.cantidad}}</p>
                                     </div>
                                 </div>
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-2">
                                     <div class="col-auto">
-                                        <p>{{sale.importe}}</p>
+                                        <p>{{c.precioUnitario}}</p>
                                     </div>
                                 </div>
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-2">
                                     <div class="col-auto">
-                                        <p>{{sale.codigo}}</p>
+                                        <p>{{c.importe}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -164,12 +174,25 @@
         data: ()=> {
             return{
                 customer : null,
+                clientAc : [],
                 sales: [],
+                nombreCompleto : null,
+                deuda : null,
+                disponible : null,
                 products: [],
+                productsName: [],
                 deliveries: [],
+                deliveriesName: [],
                 dni : null,
+                cantidad : null,
                 generated_date : null,
                 payment : null,
+                cart : [],
+                item : null,
+                pN : null,
+                dN: null,
+                precioDelivery : null,
+                importe : null
             }
         },
         mounted() {
@@ -177,28 +200,92 @@
             this.axios.get(baseURL + 'products')
                 .then(response =>{
                     this.products = response.data.content;
+                    this.AsignarNombreProd();
                     console.log(response);
                 });
             this.axios.get(baseURL + 'deliveries')
                 .then(response =>{
                     this.deliveries = response.data.content;
+                    console.log(this.deliveries)
+                    this.AsignarNombreDelivery();
                     console.log(response);
                 });
-            //Get By Dni
-            this.axios.get(baseURL + 'users/1/customersDni/'+this.dni)
-                .then(response => {
-                    this.customer = response.data.content;
-                    console.log(response);
-                })
         },
         methods:{
+            getCustomerByDni() {
+              this.axios.get(baseURL + 'users/1/customersDni/' + this.dni)
+                  .then(responseCustomer => {
+                    this.customer = responseCustomer.data;
+                    this.nombreCompleto =  this.customer.customerName + ' '+ this.customer.customerLastname;
+                    console.log(responseCustomer);
+                    this.axios.get(baseURL + 'customers/' + responseCustomer.data.id + '/customerAccounts').then(responseCustomerAcoutn => {
+                      this.clientAc = responseCustomerAcoutn.data;
+                      this.deuda = this.clientAc.currentBalance.toFixed(2);
+                      this.disponible = this.clientAc.availableBalance.toFixed(2);
+                      console.log(responseCustomerAcoutn);
+                      this.axios.get(baseURL + 'customerAccounts/' + responseCustomerAcoutn.data.id + '/payments')
+                          .then(response => {
+                            this.payments = response.data.content;
+                            console.log(response);
+                          })
+                    });
+                    this.axios.get(baseURL + 'customers/' + responseCustomer.data.id + '/orders')
+                        .then(response => {
+                          this.orders = response.data.content;
+                          console.log(response);
+                        });
+                  });
+            },
             postOrder(){
                 //Cambiar customers 1 por id
-                this.axios.post(baseURL + 'customers/1/orders',{
-                    generated_date : this.generated_date,
-                    payment: parseFloat(this.payment)
-              })
+                for (let i = 0; i < this.cart.length; i++) {
+                    this.importe = this.importe + this.cart[i].importe;
+                }
+                console.log(this.importe + this.precioDelivery);
+                  this.axios.post(baseURL + 'customers/'+ this.customer.id + '/orders',{
+                      generated_date : this.generated_date,
+                      payment: parseFloat(this.importe + this.precioDelivery)
+                })
+            },
+            AsignarNombreProd(){
+                for (let i = 0; i < this.products.length; i++){
+                  this.products[i].text = this.products[i].productName;
+                  this.products[i].value = this.products[i].id;
+                  this.productsName.push(this.products[i]);
+                }
+            },
+            AsignarNombreDelivery(){
+                for (let i = 0; i < this.deliveries.length; i++){
+                  this.deliveriesName.push(this.deliveries[i].typeDelivery);
+                }
+            },
+            AnanirCarrito(){
+                this.item = [];
+                this.item.cantidad = this.cantidad;
+                console.log(this.pN);
+                for (let i = 0; i < this.products.length; i++) {
+                  if(this.pN === this.products[i].id){
+                    this.item.id = this.products[i].id;
+                    this.item.producto = this.products[i].productName;
+                    this.item.precioUnitario = this.products[i].salePrice;
+                    this.item.importe = this.item.precioUnitario * this.item.cantidad;
+                  }
+                }
+                this.cart.push(this.item);
+            },
+            AsignarDelivery(){
+              if(this.dN === "Express"){
+                this.precioDelivery = 15.00
+              }
+              if(this.dN === "Regular"){
+                this.precioDelivery = 12.00
+              }
+              if(this.dN === "Economic"){
+                this.precioDelivery = 9.5
+              }
+              console.log(this.precioDelivery);
             }
+
         }
     }
 </script>
