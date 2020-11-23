@@ -10,17 +10,17 @@
                         <div class="left">
                             <label for="password">Contraseña actual</label>
                             <div></div>
-                            <input id="password" type="password" name="password"/>
+                            <input v-model="oldPassword" id="password" type="password" name="password"/>
                         </div>
                         <div></div>
                         <div class="left">
                             <label for="c_password">Nueva Contraseña</label>
                             <div></div>
-                            <input id="c_password" type="password" name="password" />
+                            <input v-model="newPassword" id="c_password" type="password" name="password" />
                         </div>
                         <div></div>
                         <div style="padding-left: 1rem">
-                            <b-btn>Cambiar</b-btn>
+                            <b-btn @click="updatePassword()">Cambiar</b-btn>
                         </div>
                     </div>
                 </div>
@@ -30,8 +30,40 @@
 </template>
 
 <script>
-    export default {
-        name: "ChangePassword"
+    import { baseURL } from '@/baseURL';
+    export default  {
+        name: "ClientList",
+        data: ()=> {
+            return{
+                user: [],
+                password: null,
+                oldPassword: null,
+                newPassword: null,
+            }
+        },
+        mounted() {
+            console.log()
+            this.axios.get(baseURL + 'users/1/')
+                .then(response =>{
+                    this.user = response.data;
+                    this.password = this.user.password;
+                })
+        },
+        methods:{
+            updatePassword(){
+                if(this.oldPassword == this.password){
+                    this.user.password = this.newPassword
+                    this.axios.put(baseURL + 'users/1', this.user).then(response => {
+                        console.log(response)
+                        alert("Constraseña Actualizada")
+                    })
+                }
+                else{
+                    alert("Error")
+                }
+            }
+
+        }
     }
 </script>
 
