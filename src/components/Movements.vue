@@ -5,8 +5,8 @@
             <div class="row justify-content-center align-items-center register_body">
                 <div class=" col-auto ">
                     <div style="align-items: center">
-                        <form class="text-info left right">
-                            <div class="left right">
+                        <form class="text-info left right customer-input body_slam">
+                            <div class="left right" style="padding-left: 5rem">
                                 <div>
                                   <label for="pay">Cliente</label>
                                 </div>
@@ -18,36 +18,42 @@
                                 </div>
                             </div>
                             <div class="left right">
-                                <label for="debt">Deuda</label>
+                                <label>Deuda</label>
                                 <div class="paddin"></div>
-                                <input id="debt" type="number" name="debt" placeholder="25000"/>
+                                <input class="output" v-model="deuda"/>
                             </div>
                             <div class="left right">
-                                <label for="disp">Disponible</label>
+                                <label>Disponible</label>
                                 <div class="paddin"></div>
-                                <input id="disp" type="number" name="disp" placeholder="250000"/>
+                                <input class="output" v-model="disponible"/>
                             </div>
                         </form>
                     </div>
+                    <br><br><br><br><br><br><br><br><br><br>
                     <div v-if="this.dni != null" class="bg-primary body_slam left" style="padding-right: 10%">
                         <div class="text-info" style="text-align: center; padding-left: 90px">
                             <h1 class="cust-name">{{customer.customerName}} {{customer.customerLastname}}</h1>
                         </div>
-                        <!-- ACA NO FUNCIONA EL CLIENTE CA-->
                         <div class="text-info" style="text-align: center; padding-left: 200px">
                         </div>
                         <div style="padding-top: 2rem" class="text-secondary">
                             <div>
-                                <p>{{clientAc.interestRate}}</p>
+                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="porcenInteres"/>
                             </div>
                             <div>
-                                <small>Periodo: Bimestral</small>
+                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="tipoInteres"/>
                             </div>
                             <div>
-                                <small>Capitalización: Diario</small>
+                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="periodoInteres"/>
                             </div>
                             <div>
-                                <small>Registro: 7/11/20</small>
+                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="capitalizacion"/>
+                            </div>
+                            <div>
+                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="lastDateMovement"/>
+                            </div>
+                            <div>
+                              <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="credito"/>
                             </div>
                             <div class = "left right">
                                 <div style="padding-top: 2rem"></div>
@@ -63,9 +69,9 @@
                             </div>
                           <div class="text-right">
                             <div style="padding-left: 10rem">
-                              <label for="gain">Ganancia</label>
+                              <label >Ganancia</label>
                             </div>
-                            <input id="gain" type="number" step="0.1" placeholder="25000" class="gain"/>
+                            <input v-model="ganancia"/>
                             <div style="padding-top: 2rem">
                               <b-btn class = "colorbtn">Imprimir Boletas</b-btn>
                             </div>
@@ -226,7 +232,16 @@
              orders: [],
              payments: [],
              payment : null,
-             generated_date : null
+             generated_date : null,
+             deuda : null,
+             disponible : null,
+             ganancia: null,
+             porcenInteres : null,
+             tipoInteres: null,
+             periodoInteres: null,
+             capitalizacion: null,
+             lastDateMovement: null,
+             credito: null
            }
        },
        mounted() {
@@ -240,6 +255,21 @@
                  console.log(responseCustomer);
                  this.axios.get(baseURL + 'customers/'+ responseCustomer.data.id+'/customerAccounts').then(responseCustomerAcoutn => {
                    this.clientAc = responseCustomerAcoutn.data;
+                   this.deuda = this.clientAc.currentBalance.toFixed(2);
+                   this.disponible = this.clientAc.availableBalance.toFixed(2);
+                   this.ganancia = this.clientAc.gain.toFixed(2);
+                   if(this.clientAc.interestRateType === 1){
+                      this.tipoInteres = "Tipo de Interés: Simple";
+                   }
+                   if(this.clientAc.interestRatePeriod === 1){
+                     this.periodoInteres = "Periodo: Mensual";
+                   }
+                   if(this.clientAc.compounding === 0){
+                     this.capitalizacion = "Capitalizacion: ---";
+                   }
+                   this.porcenInteres = 'Interes: ' + this.clientAc.interestRate * 100 + '%';
+                   this.credito = 'Credito: ' + this.clientAc.credit;
+                   this.formatDateCustomerAccount();
                    console.log(responseCustomerAcoutn);
                    this.axios.get(baseURL + 'customerAccounts/' + responseCustomerAcoutn.data.id + '/payments')
                        .then(response =>{
@@ -267,7 +297,7 @@
              //2000-12-11 19:00:00
              let date = this.orders[i].generated_date;
              let splitDate = date.split("-")
-             let formatDate = splitDate[2][0] + splitDate[2][1] + '-' + splitDate[1] + '-' + splitDate[0];
+             let formatDate = splitDate[0] + '-' + splitDate[1] + '-' + splitDate[2][0] +splitDate[2][1];
              this.orders[i].generated_date = formatDate;
            }
          },
@@ -276,10 +306,16 @@
              //2000-12-11 19:00:00
              let date = this.payments[i].generated_date;
              let splitDate = date.split("-")
-             let formatDate = splitDate[2][0] + splitDate[2][1] + '-' + splitDate[1] + '-' + splitDate[0];
+             let formatDate = splitDate[0] + '-' + splitDate[1] + '-' + splitDate[2][0] +splitDate[2][1];
              this.payments[i].generated_date = formatDate;
            }
          },
+         formatDateCustomerAccount(){
+           let date = this.clientAc.firstDate;
+           let splitDate = date.split("-")
+           let formatDate = splitDate[0] + '-' + splitDate[1] + '-' + splitDate[2][0] +splitDate[2][1];
+           this.lastDateMovement =  "Ultimo Movimiento: " + formatDate;
+         }
        }
    }
 </script>
@@ -380,5 +416,14 @@
     }
     .colorbtn{
       color:#28201e;
+    }
+    .customer-input{
+      background: #28201e;
+    }
+    .output{
+      border-radius: 12px;
+      text-align: center;
+      color: #28201e;
+      background: #a6a8aa;
     }
 </style>

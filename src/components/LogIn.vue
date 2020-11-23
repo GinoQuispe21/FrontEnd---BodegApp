@@ -25,7 +25,7 @@
                         <input v-model="uEmail" id="user" type="text" name="user"/>
                     </div>
                     <div style="padding: 1rem" class="text-info">
-                        <label for="password">Correo Electrónico</label>
+                        <label for="password">Contraseña</label>
                         <div></div>
                         <input v-model="uPassword" id="password" type="password" name="password"/>
                     </div>
@@ -51,6 +51,7 @@
                 user: [],
                 email: null,
                 username: null,
+                userLastname : null,
                 password: null,
                 uEmail: null,
                 uPassword: null,
@@ -64,12 +65,13 @@
                     this.email = this.user.email;
                     this.password = this.user.password;
                     this.username = this.user.username;
+                    this.userLastname = this.user.lastname;
                 })
         },
         methods:{
             login(){
                 if(this.uEmail == this.email && this.uPassword == this.password){
-                    alert("Bienvenido de vuelta " + this.username)
+                    alert("Bienvenido de vuelta " + this.username + " " + this.userLastname)
                     this.$router.push('/homepage')
                 }
                 else {

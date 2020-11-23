@@ -70,7 +70,38 @@
                             </div>
                         </b-form>
                     </div>
+                      <hr class="hr1">
                     <div class=" col-12">
+                        <div class = "title" style="text-align: center">
+                          <h1 style="color: #a6a8aa">Productos Seleccionados</h1>
+                        </div>
+                        <div style="color: #ff775c" class="row justify-content-center">
+                          <div class="row justify-content-center col-3">
+                            <div class="col-auto">
+                              <p>Código</p>
+                            </div>
+                          </div>
+                          <div class="row justify-content-center col-3">
+                            <div class="col-auto">
+                              <p>Producto</p>
+                            </div>
+                          </div>
+                          <div class="row justify-content-center col-2">
+                            <div class="col-auto">
+                              <p>Cantidad</p>
+                            </div>
+                          </div>
+                          <div class="row justify-content-center col-2">
+                            <div class="col-auto">
+                              <p>Precio Unitario</p>
+                            </div>
+                          </div>
+                          <div class="row justify-content-center col-2">
+                            <div class="col-auto">
+                              <p>Importe</p>
+                            </div>
+                          </div>
+                        </div>
                         <li v-for="(c, index) in cart" :key="index" class="table2">
                             <div class="row justify-content-center col-12">
                                 <div class="row justify-content-center col-3">
@@ -370,5 +401,15 @@
       color: #ff775c;
       padding-left: 0.75rem;
       background-color: white;
+    }
+    .hr1{
+      background-color: #ffce00;
+      opacity: 0.90;
+      height: auto;
+    }
+    hr{
+      background-color: #ff775c;
+      opacity: 0.90;
+      height: auto;
     }
 </style>
