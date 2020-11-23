@@ -8,9 +8,6 @@
                 <v-btn text to="/register" class="text-info">
                     Registrarse
                 </v-btn>
-                <v-btn text to="/homepage" class="text-info">
-                    Página de Inicio
-                </v-btn>
                 <v-divider vertical></v-divider>
             </v-toolbar-items>
         </v-toolbar>
@@ -21,38 +18,21 @@
     <v-card class="bg-primary rounded-xl vicard" outlined>
             <div align="center" class="text-info login">Iniciar Sesión</div>
         <template>
-            <v-row justify="center">
-                <v-col cols="10" sm="8" md="8" lg="6">
-                    <v-card style="border-color: #ffce00" class="bg-warning rounded-xl " ref="form" tile>
-                        <v-card-text>
-                            <v-text-field
-                                    ref="user"
-                                    v-model="user"
-                                    label="User or Email"
-
-                                    required outlined>
-                            </v-text-field>
-                            <v-text-field
-                                    :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
-                                    :type="show3 ? 'text' : 'password'"
-                                    ref="password"
-                                    v-model="password"
-                                    label="Password"
-                                    required outlined
-                                    @click:append="show3 = !show3">
-                            </v-text-field>
-                            <div>
-                                <a class="text-secondary">¿Olvidaste la contraseña?</a>
-                            </div>
-                            <div style="padding: 1rem"></div>
-                            <div class="text-info butt">
-                                <b-button variant="secondary">Iniciar Sesión</b-button>
-                            </div>
-
-                        </v-card-text>
-                    </v-card>
-                </v-col>
-            </v-row>
+                <div>
+                    <div style="padding: 1rem" class="text-info">
+                        <label for="user">Correo Electrónico</label>
+                        <div></div>
+                        <input v-model="uEmail" id="user" type="text" name="user"/>
+                    </div>
+                    <div style="padding: 1rem" class="text-info">
+                        <label for="password">Correo Electrónico</label>
+                        <div></div>
+                        <input v-model="uPassword" id="password" type="password" name="password"/>
+                    </div>
+                    <div style="padding-bottom: 1rem" class="text-center">
+                        <b-btn @click="login()">Ingresar</b-btn>
+                    </div>
+                </div>
         </template>
     </v-card>
                     </div>
@@ -63,16 +43,41 @@
 </template>
 
 <script>
-    export default {
-        name: "LogIn",
-        data(){
+    import { baseURL } from '@/baseURL';
+    export default  {
+        name: "ClientList",
+        data: ()=> {
             return{
-            user: null,
-            show3: null,
-            password: null,
+                user: [],
+                email: null,
+                username: null,
+                password: null,
+                uEmail: null,
+                uPassword: null,
             }
         },
+        mounted() {
+            console.log()
+            this.axios.get(baseURL + 'users/1')
+                .then(response =>{
+                    this.user = response.data;
+                    this.email = this.user.email;
+                    this.password = this.user.password;
+                    this.username = this.user.username;
+                })
+        },
+        methods:{
+            login(){
+                if(this.uEmail == this.email && this.uPassword == this.password){
+                    alert("Bienvenido de vuelta " + this.username)
+                    this.$router.push('/homepage')
+                }
+                else {
+                    alert(this.password)
+                }
+            }
 
+        }
     }
 
 </script>
@@ -96,5 +101,14 @@
 }
 .ass{
     padding: 0;
+}
+input{
+    width: 100%;
+    height: 30px;
+    border: #a6a8aa solid thin;
+    border-radius: 10px;
+    color: #ff775c;
+    padding-left: 0.75rem;
+    background-color: white;
 }
 </style>
