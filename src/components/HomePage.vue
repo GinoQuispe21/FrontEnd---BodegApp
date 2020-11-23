@@ -44,9 +44,7 @@
             <v-tab class="text-info bg-primary">
                 Editar Productos
             </v-tab>
-            <v-tab class="text-info bg-primary">
-              aaaaaaaaaa
-            </v-tab>
+
             <v-tab-item>
                 <HomeP></HomeP>
             </v-tab-item>
@@ -80,9 +78,6 @@
             <v-tab-item>
                 <EditProduct></EditProduct>
             </v-tab-item>
-            <v-tab-item>
-              <aaaaaaaaaa></aaaaaaaaaa>
-            </v-tab-item>
         </v-tabs>
     </v-card>
 </template>
@@ -100,11 +95,9 @@
     import EditClient from "@/components/EditClient";
     import EditProduct from "@/components/EditProduct";
     import HomeP from "@/components/HomeP";
-    import Aaaaaaaaaa from "@/components/aaaaaaaaaa";
     export default {
         name: "HomePage",
         components: {
-            Aaaaaaaaaa,
             HomeP,
             EditProduct,
             EditClient,

@@ -68,7 +68,7 @@
                             <label for="2">
                                 <h1>Paquete 2</h1>
                                 <p><small>Tasa: 25%</small></p>
-                                <p><smalll>Tipo de Interés: Nominal</smalll></p>
+                                <p><small>Tipo de Interés: Nominal</small></p>
                                 <p><small>Periodo: Bimestral</small></p>
                                 <p><small>Capitalización: Diaria</small></p>
                                 <p><small>Crédito: S/.1500.00</small></p>
@@ -88,7 +88,7 @@
                             </div>
                           <div class="bg-primary left right selection">
                             <input @click="Paquete4()" type="radio" id="3" name="gender" value="male">
-                            <label for="4">
+                            <label for="interesRate">
                               <h1>Personalizado</h1>
                               <div>
                                   <label class="left right3" for="name">Tasa</label>

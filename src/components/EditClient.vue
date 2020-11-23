@@ -49,45 +49,6 @@
                         </form>
                     </div>
                     <div style="padding-bottom: 3rem"></div>
-                    <div class="tasa">
-                        <form>
-                            <div class="bg-primary left right selection">
-                                <input type="radio" id="1" name="gender" value="male">
-                                <label for="1">
-                                    <h1>Paquete 1</h1>
-                                    <p><small> Tasa: 10%</small></p>
-                                    <p><small>Tipo de Interés: Simple</small></p>
-                                    <p><small>Periodo: Mensual</small></p>
-                                    <p><small>Crédito: S/.1000.00</small></p>
-                                    <p><small>Tipo año: Ordinal</small></p>
-                                </label><br>
-                            </div>
-                            <div ></div>
-                            <div class="bg-primary left right selection">
-                                <input type="radio" id="2" name="gender" value="male">
-                                <label for="2">
-                                    <h1>Paquete 2</h1>
-                                    <p><small>Tasa: 22%</small></p>
-                                    <p><smalll>Tipo de Interés: Nominal</smalll></p>
-                                    <p><small>Periodo: Bimestral</small></p>
-                                    <p><small>Capitalización: Diaria</small></p>
-                                    <p><small>Crédito: S/.1500.00</small></p>
-                                    <p><small>Tipo año: Ordinal</small></p>
-                                </label><br>
-                            </div>
-                            <div class="bg-primary left right selection">
-                                <input type="radio" id="3" name="gender" value="male">
-                                <label for="3">
-                                    <h1>Paquete 3</h1>
-                                    <p><small>Tasa: 18%</small></p>
-                                    <p><small>Tipo de Interés: Efectiva</small></p>
-                                    <p><small>Periodo: Mensual</small></p>
-                                    <p><small>Crédito: S/.2000.00</small></p>
-                                    <p><small>Tipo año: Ordinal</small></p>
-                                </label><br>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
