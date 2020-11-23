@@ -192,11 +192,11 @@
               //Create Customer
               this.axios.post(baseURL + 'customers/' + responseUser.data.id + '/customerAccounts', {
                 credit : this.credit,
-                interestRate : this.interestRate,
+                interestRate : this.interestRate / 100,
                 interestRateType : this.interestRateType,
                 interestRatePeriod : this.interestRatePeriod,
                 compounding : this.compounding,
-                typeYear : this.typeYear
+                typeYear : this.typeYear,
               })})
           }
         }

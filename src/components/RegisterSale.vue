@@ -19,7 +19,7 @@
                             <div class="left right">
                                 <label>Nombre y Apellido</label>
                                 <div class="paddin"></div>
-                                <input v-model="nombreCompleto"/>
+                                <input v-model="nombreCompleto" style=" width: 125%"/>
                             </div>
                             <div class="left right">
                                 <label>Deuda</label>
@@ -175,15 +175,11 @@
                     </div>
                     <div style="text-align: right ">
                         <div>
-                        <small>Delivery:</small>
+                        <p>Delivery: {{this.precioDelivery}}</p>
                         </div>
                         <div>
-                        <small>Total: </small>
+                        <p>Total: {{this.importe}}</p>
                         </div>
-                    </div>
-                    <div class="left right">
-                        <label>Monto de venta</label>
-                        <input v-model="payment" id="payment" type="number" step="0.1" class="aaaa"/>
                     </div>
                     <div>
                         <div class="text-right butt">

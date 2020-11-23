@@ -50,10 +50,10 @@
                                 <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="capitalizacion"/>
                             </div>
                             <div>
-                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="lastDateMovement"/>
+                              <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="credito"/>
                             </div>
                             <div>
-                              <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="credito"/>
+                              <input style="text-align: left; color: #ff775c; background: #28201e; width: 100%" v-model="lastDateMovement"/>
                             </div>
                             <div class = "left right">
                                 <div style="padding-top: 2rem"></div>
@@ -68,10 +68,10 @@
                                 <input @click="postPayment()" type="submit" value="Aceptar" style="padding-left: 1rem" class="bn">
                             </div>
                           <div class="text-right">
-                            <div style="padding-left: 10rem">
+                            <div style="padding-right: 3rem">
                               <label >Ganancia</label>
                             </div>
-                            <input v-model="ganancia"/>
+                            <input class="output"  v-model="ganancia"/>
                             <div style="padding-top: 2rem">
                               <b-btn class = "colorbtn">Imprimir Boletas</b-btn>
                             </div>
@@ -82,7 +82,7 @@
             </div>
           <div v-if="this.dni != null" class="tasa">
             <form>
-              <div class="bg-primary left right selection">
+              <div v-if="this.payments.length > 0 " class="bg-primary left right selection">
                 <div style="border-radius: 0px"  class="col-13 text-info bg-primary row justify-content-center" >
                   <div class="col-12">
                     <div class = "title" style="text-align: center">
@@ -148,7 +148,7 @@
                 </div>
               </div>
               <div ></div>
-              <div class="bg-primary left right selection">
+              <div v-if="this.orders.length > 0" class="bg-primary left right selection">
                 <div style="border-radius: 0px"  class="col-14 text-info bg-primary row justify-content-center" >
                   <div class="col-12">
                     <div class = "title" style="text-align: center">
