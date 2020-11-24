@@ -130,7 +130,7 @@
                                 <div class="vl"></div>
                                 <div class="row justify-content-center col-2">
                                     <div class="col-auto">
-                                        <p>{{c.importe}}</p>
+                                        <p>{{c.importe.toFixed(2)}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +178,7 @@
                         <p>Delivery: {{this.precioDelivery}}</p>
                         </div>
                         <div>
-                        <p>Total: {{this.importe}}</p>
+                        <p>Total:</p>
                         </div>
                     </div>
                     <div>

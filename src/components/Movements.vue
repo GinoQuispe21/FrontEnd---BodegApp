@@ -64,8 +64,10 @@
                                 <div>
                                     <label for="pay">Fecha de Pago</label>
                                 </div>
-                                <input v-model="generated_date" id="date" type="text" step="0.1" class="aaaa"/>
-                                <input @click="postPayment()" type="submit" value="Aceptar" style="padding-left: 1rem" class="bn">
+                                <input v-model="generated_date_p" id="date" type="text" step="0.1" class="aaaa"/>
+                                <div class="col-auto">
+                                  <b-btn @click="postPayment()">Pagar</b-btn>
+                                </div>
                             </div>
                           <div class="text-right">
                             <div style="padding-right: 3rem">
@@ -241,7 +243,8 @@
              periodoInteres: null,
              capitalizacion: null,
              lastDateMovement: null,
-             credito: null
+             credito: null,
+             generated_date_p:null
            }
        },
        mounted() {
@@ -261,11 +264,20 @@
                    if(this.clientAc.interestRateType === 1){
                       this.tipoInteres = "Tipo de Interés: Simple";
                    }
+                   if(this.clientAc.interestRateType === 2){
+                     this.tipoInteres = "Tipo de Interés: Nominal";
+                   }
                    if(this.clientAc.interestRatePeriod === 1){
                      this.periodoInteres = "Periodo: Mensual";
                    }
+                   if(this.clientAc.interestRatePeriod === 2){
+                     this.periodoInteres = "Periodo: Bimestral";
+                   }
                    if(this.clientAc.compounding === 0){
                      this.capitalizacion = "Capitalizacion: ---";
+                   }
+                   if(this.clientAc.compounding === 1){
+                     this.capitalizacion = "Capitalizacion: Diario";
                    }
                    this.porcenInteres = 'Interes: ' + this.clientAc.interestRate * 100 + '%';
                    this.credito = 'Credito: ' + this.clientAc.credit;
@@ -288,7 +300,7 @@
          },
          postPayment(){
            this.axios.post(baseURL + 'customerAccounts/1/payments', {
-             generated_date : this.generated_date,
+             generated_date : this.generated_date_p,
              payment: parseFloat(this.payment)
            })
          },
