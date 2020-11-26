@@ -70,7 +70,7 @@
         },
         methods:{
             login(){
-                if(this.uEmail == this.email && this.uPassword == this.password){
+                if(this.uEmail === this.email && this.uPassword === this.password){
                     alert("Bienvenido de vuelta " + this.username + " " + this.userLastname)
                     this.$router.push('/homepage')
                 }

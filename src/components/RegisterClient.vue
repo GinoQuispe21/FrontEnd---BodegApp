@@ -153,24 +153,24 @@
                 typeYear : null
             }
         },
-        methods:{
-          Paquete1(){
-              this.credit = 1000.00;
-              this.interestRate = 0.10;
-              this.interestRateType = 1;
-              this.interestRatePeriod = 1;
-              this.compounding = 0;
-              this.typeYear = 1;
+        methods: {
+          Paquete1() {
+            this.credit = 1000.00;
+            this.interestRate = 0.10;
+            this.interestRateType = 1;
+            this.interestRatePeriod = 1;
+            this.compounding = 0;
+            this.typeYear = 1;
           },
-          Paquete2(){
-             this.credit = 1500.00;
-             this.interestRate = 0.25;
-             this.interestRateType = 2;
-             this.interestRatePeriod = 2;
-             this.compounding = 1;
-             this.typeYear = 1;
-          } ,
-          Paquete3(){
+          Paquete2() {
+            this.credit = 1500.00;
+            this.interestRate = 0.25;
+            this.interestRateType = 2;
+            this.interestRatePeriod = 2;
+            this.compounding = 1;
+            this.typeYear = 1;
+          },
+          Paquete3() {
             this.credit = 2000.00;
             this.interestRate = 0.18;
             this.interestRateType = 3;
@@ -178,26 +178,32 @@
             this.compounding = 0;
             this.typeYear = 1;
           },
-          postCustomer(){
+          postCustomer() {
+            if(this.interestRate > 0 && this.credit > 0){
             this.axios.post(baseURL + 'users/1/customers', {
-              dni : parseFloat(this.dni),
-              customerName : this.customerName,
-              customerLastname : this.customerLastname,
-              address : this.address,
-              district : this.district,
-              country : this.country,
-              email : this.email
+              dni: parseFloat(this.dni),
+              customerName: this.customerName,
+              customerLastname: this.customerLastname,
+              address: this.address,
+              district: this.district,
+              country: this.country,
+              email: this.email
             })
-            .then((responseUser) => {
-              //Create Customer
-              this.axios.post(baseURL + 'customers/' + responseUser.data.id + '/customerAccounts', {
-                credit : this.credit,
-                interestRate : this.interestRate,
-                interestRateType : this.interestRateType,
-                interestRatePeriod : this.interestRatePeriod,
-                compounding : this.compounding,
-                typeYear : this.typeYear,
-              })})
+                .then((responseUser) => {
+                  //Create Customer
+                  this.axios.post(baseURL + 'customers/' + responseUser.data.id + '/customerAccounts', {
+                    credit: this.credit,
+                    interestRate: this.interestRate,
+                    interestRateType: this.interestRateType,
+                    interestRatePeriod: this.interestRatePeriod,
+                    compounding: this.compounding,
+                    typeYear: this.typeYear,
+                  })
+                })
+            }
+            else{
+              alert("Ingreso un valor incorrecto, revisar los datos de su cuenta")
+            }
           }
         }
     }

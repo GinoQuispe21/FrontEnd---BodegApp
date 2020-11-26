@@ -302,10 +302,15 @@
                });
          },
          postPayment(){
-           this.axios.post(baseURL + 'customerAccounts/'+ this.customer.id +'/payments', {
-             generated_date : this.generated_date_p,
-             payment: parseFloat(this.payment)
-           })
+           if(this.payment > 0){
+             this.axios.post(baseURL + 'customerAccounts/' + this.customer.id + '/payments', {
+               generated_date: this.generated_date_p,
+               payment: parseFloat(this.payment)
+             })
+           }
+           else{
+             alert("Ingreso un pago invalido");
+           }
          },
          formatDateOrders() {
            for (let i = 0; i < this.orders.length; i++) {
