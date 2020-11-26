@@ -38,19 +38,22 @@
                         </div>
                         <div style="padding-top: 2rem" class="text-secondary">
                             <div>
-                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="porcenInteres"/>
+                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 100%" v-model="porcenInteres"/>
                             </div>
                             <div>
-                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="tipoInteres"/>
+                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 100%" v-model="tipoInteres"/>
                             </div>
                             <div>
-                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="periodoInteres"/>
+                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 100%" v-model="periodoInteres"/>
                             </div>
                             <div>
-                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="capitalizacion"/>
+                                <input style="text-align: left; color: #ff775c; background: #28201e; width: 100%" v-model="capitalizacion"/>
                             </div>
                             <div>
-                              <input style="text-align: left; color: #ff775c; background: #28201e; width: 50%" v-model="credito"/>
+                              <input style="text-align: left; color: #ff775c; background: #28201e; width: 100%" v-model="credito"/>
+                            </div>
+                            <div>
+                              <input style="text-align: left; color: #ff775c; background: #28201e; width: 100%" v-model="tipoaño"/>
                             </div>
                             <div>
                               <input style="text-align: left; color: #ff775c; background: #28201e; width: 100%" v-model="lastDateMovement"/>
@@ -244,6 +247,7 @@
              capitalizacion: null,
              lastDateMovement: null,
              credito: null,
+             tipoaño: null,
              generated_date_p:null
            }
        },
@@ -276,11 +280,47 @@
                    if(this.clientAc.interestRatePeriod === 2){
                      this.periodoInteres = "Periodo: Bimestral";
                    }
+                   if(this.clientAc.interestRatePeriod === 3){
+                     this.periodoInteres = "Periodo: Trimestral";
+                   }
+                   if(this.clientAc.interestRatePeriod === 4){
+                     this.periodoInteres = "Periodo: Cuatrimestral";
+                   }
+                   if(this.clientAc.interestRatePeriod === 5){
+                     this.periodoInteres = "Periodo: Semmestral";
+                   }
+                   if(this.clientAc.interestRatePeriod === 6){
+                     this.periodoInteres = "Periodo: Anual";
+                   }
                    if(this.clientAc.compounding === 0){
                      this.capitalizacion = "Capitalizacion: ---";
                    }
                    if(this.clientAc.compounding === 1){
                      this.capitalizacion = "Capitalizacion: Diario";
+                   }
+                   if(this.clientAc.compounding === 2){
+                     this.capitalizacion = "Capitalizacion: Semanal";
+                   }
+                   if(this.clientAc.compounding === 3){
+                     this.capitalizacion = "Capitalizacion: Mensual";
+                   }
+                   if(this.clientAc.compounding === 4){
+                     this.capitalizacion = "Capitalizacion: Bimestral";
+                   }
+                   if(this.clientAc.compounding === 5){
+                     this.capitalizacion = "Capitalizacion: Trimestral";
+                   }
+                   if(this.clientAc.compounding === 6){
+                     this.capitalizacion = "Capitalizacion: Cuatrimestral";
+                   }
+                   if(this.clientAc.compounding === 7){
+                     this.capitalizacion = "Capitalizacion: Semestral";
+                   }
+                   if(this.clientAc.typeYear === 1){
+                     this.tipoaño = "Año: Ordinario";
+                   }
+                   if(this.clientAc.typeYear === 2){
+                     this.tipoaño = "Año: Exacto";
                    }
                    this.porcenInteres = 'Interes: ' + this.clientAc.interestRate * 100 + '%';
                    this.credito = 'Credito: ' + this.clientAc.credit;
@@ -298,14 +338,27 @@
                        this.orders = response.data.content;
                        this.formatDateOrders();
                        console.log(response);
-                     });
-               });
+                     }).catch(error => {
+                       console.log(error);
+                       alert(error);
+                 });
+               }).catch(error => {
+                 console.log(error);
+                  if(error.response) {
+                      alert("No se encontro al usuario con el DNI ingresado, verifiquelo");
+                  }
+                 });
          },
          postPayment(){
            if(this.payment > 0){
              this.axios.post(baseURL + 'customerAccounts/' + this.customer.id + '/payments', {
                generated_date: this.generated_date_p,
                payment: parseFloat(this.payment)
+             }).catch(error => {
+               console.log(error);
+               if(error.response) {
+                 alert("No se pudo registrar el pado de forma correcta, verifique si el usuario tiene deudas o si excede la deuda");
+               }
              })
            }
            else{

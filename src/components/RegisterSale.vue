@@ -261,7 +261,11 @@
                           this.orders = response.data.content;
                           console.log(response);
                         });
-                  });
+                  }).catch(error =>{
+                    if(error.response) {
+                      alert("No se encontro a un usuario con ese DNI,verifiquelo");
+                    }
+              });
             },
             postOrder(){
                 //Cambiar customers 1 por id
