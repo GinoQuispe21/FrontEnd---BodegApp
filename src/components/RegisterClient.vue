@@ -179,7 +179,8 @@
             this.typeYear = 1;
           },
           postCustomer() {
-            if(this.interestRate > 0 && this.credit > 0){
+            if(this.interestRate > 0 && this.credit > 0 && this.interestRateType >= 1 && this.interestRateType <= 3 && this.interestRatePeriod >= 1
+                && this.interestRatePeriod <= 6 && this.compounding >= 0 && this.compounding <= 7 && this.typeYear >= 1 && this.typeYear <= 2){
             this.axios.post(baseURL + 'users/1/customers', {
               dni: parseFloat(this.dni),
               customerName: this.customerName,
@@ -199,7 +200,10 @@
                     compounding: this.compounding,
                     typeYear: this.typeYear,
                   })
-                })
+                }).catch(error => {
+                  console.log(error);
+                  alert(error);
+                  })
             }
             else{
               alert("Ingreso un valor incorrecto, revisar los datos de su cuenta")
