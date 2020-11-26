@@ -248,7 +248,10 @@
                     this.axios.get(baseURL + 'customers/' + responseCustomer.data.id + '/customerAccounts').then(responseCustomerAcoutn => {
                       this.clientAc = responseCustomerAcoutn.data;
                       this.deuda = this.clientAc.currentBalance.toFixed(2);
-                      this.disponible = this.clientAc.availableBalance.toFixed(2);
+                      if(this.clientAc.availableBalance === 0){
+                        this.disponible = this.clientAc.credit;
+                      }
+                      else{this.disponible = this.clientAc.availableBalance.toFixed(2);}
                       console.log(responseCustomerAcoutn);
                       this.axios.get(baseURL + 'customerAccounts/' + responseCustomerAcoutn.data.id + '/payments')
                           .then(response => {
@@ -277,6 +280,7 @@
                       generated_date : this.generated_date,
                       payment: parseFloat(this.importe + this.precioDelivery)
                 })
+                alert("Se registro su venta con un monto de: " + parseFloat(this.importe + this.precioDelivery))
             },
             AsignarNombreProd(){
                 for (let i = 0; i < this.products.length; i++){

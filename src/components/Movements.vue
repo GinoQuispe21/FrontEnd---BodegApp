@@ -322,6 +322,12 @@
                    if(this.clientAc.typeYear === 2){
                      this.tipoaño = "Año: Exacto";
                    }
+                   if(this.clientAc.availableBalance === 0){
+                     this.disponible = this.clientAc.credit;
+                   }
+                   else{
+                     this.disponible = this.clientAc.availableBalance;
+                   }
                    this.porcenInteres = 'Interes: ' + this.clientAc.interestRate * 100 + '%';
                    this.credito = 'Credito: ' + this.clientAc.credit;
                    this.formatDateCustomerAccount();
