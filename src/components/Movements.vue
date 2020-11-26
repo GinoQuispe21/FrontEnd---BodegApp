@@ -267,6 +267,9 @@
                    if(this.clientAc.interestRateType === 2){
                      this.tipoInteres = "Tipo de Interés: Nominal";
                    }
+                   if(this.clientAc.interestRateType === 3){
+                     this.tipoInteres = "Tipo de Interés: Efectivo";
+                   }
                    if(this.clientAc.interestRatePeriod === 1){
                      this.periodoInteres = "Periodo: Mensual";
                    }
@@ -299,7 +302,7 @@
                });
          },
          postPayment(){
-           this.axios.post(baseURL + 'customerAccounts/1/payments', {
+           this.axios.post(baseURL + 'customerAccounts/'+ this.customer.id +'/payments', {
              generated_date : this.generated_date_p,
              payment: parseFloat(this.payment)
            })

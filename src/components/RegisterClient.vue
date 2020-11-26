@@ -192,7 +192,7 @@
               //Create Customer
               this.axios.post(baseURL + 'customers/' + responseUser.data.id + '/customerAccounts', {
                 credit : this.credit,
-                interestRate : this.interestRate / 100,
+                interestRate : this.interestRate,
                 interestRateType : this.interestRateType,
                 interestRatePeriod : this.interestRatePeriod,
                 compounding : this.compounding,
