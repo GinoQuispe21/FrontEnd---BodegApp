@@ -209,29 +209,38 @@
           postCustomer() {
             if(this.interestRate > 0 && this.credit > 0 && this.interestRateType >= 1 && this.interestRateType <= 3 && this.interestRatePeriod >= 1
                 && this.interestRatePeriod <= 6 && this.compounding >= 0 && this.compounding <= 7 && this.typeYear >= 1 && this.typeYear <= 2){
-            this.axios.post(baseURL + 'users/1/customers', {
-              dni: parseFloat(this.dni),
-              customerName: this.customerName,
-              customerLastname: this.customerLastname,
-              address: this.address,
-              district: this.district,
-              country: this.country,
-              email: this.email
-            })
-                .then((responseUser) => {
-                  //Create Customer
-                  this.axios.post(baseURL + 'customers/' + responseUser.data.id + '/customerAccounts', {
-                    credit: this.credit,
-                    interestRate: this.interestRate,
-                    interestRateType: this.interestRateType,
-                    interestRatePeriod: this.interestRatePeriod,
-                    compounding: this.compounding,
-                    typeYear: this.typeYear,
+              this.axios.get(baseURL + 'users/1/customersDni/' + this.dni).then(response => {
+                if(response.data.id !== null){
+                  alert("Ya existe un usuario con este DNI")
+                }
+                else{
+                  this.axios.post(baseURL + 'users/1/customers', {
+                    dni: parseFloat(this.dni),
+                    customerName: this.customerName,
+                    customerLastname: this.customerLastname,
+                    address: this.address,
+                    district: this.district,
+                    country: this.country,
+                    email: this.email,
+                  }).catch(error => {
+                    console.log(error);
+                    alert(error);
+                  }).then((responseUser) => {
+                    //Create Customer
+                    this.axios.post(baseURL + 'customers/' + responseUser.data.id + '/customerAccounts', {
+                      credit: this.credit,
+                      interestRate: this.interestRate,
+                      interestRateType: this.interestRateType,
+                      interestRatePeriod: this.interestRatePeriod,
+                      compounding: this.compounding,
+                      typeYear: this.typeYear,
+                    })
+                  }).catch(error => {
+                    console.log(error);
+                    alert(error);
                   })
-                }).catch(error => {
-                  console.log(error);
-                  alert(error);
-                  })
+                }
+              })
             }
             else{
               alert("Ingreso un valor incorrecto, revisar los datos de su cuenta")

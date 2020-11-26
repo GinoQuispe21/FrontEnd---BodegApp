@@ -373,6 +373,9 @@
                if(error.response) {
                  alert("No se pudo registrar el pado de forma correcta, verifique si el usuario tiene deudas o si excede la deuda");
                }
+               else{
+                 alert("Se registro correctamente el pago")
+               }
              })
            }
            else{
