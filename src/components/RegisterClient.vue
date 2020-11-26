@@ -130,6 +130,23 @@
                                 <div class="paddin"></div>
                                 <input class ="inputpers" v-model="typeYear" id="typeYear" type="text"/>
                               </div><br>
+                              <div class="center" >
+                                <vs-button @click="popupActivo=true" color="primary" type="border" style="color: #ffce00; ">Dudas</vs-button>
+                                <vs-popup class="info"  title="Dudas frecuentes sobre datos de ingreso" :active.sync="popupActivo">
+                                  <p>
+                                    Tipo de interes: 1: Interes Simple, 2: Interes Nominal, 3: Interes Compuesto
+                                  </p>
+                                  <p>
+                                    Periodo: 1:Mensual, 2:Bimestral, 3:Trimestral, 4:Cuatrimestral, 5:Semestral, 6:Anual
+                                  </p>
+                                  <p>
+                                    Capitalizacion: 0: No Asignado, 1:Diaria, 2:Semanal, 3:Mensual, 4:Bimestral, 5:Trimestral, 6:Cuatrimestral, 7:Semestral
+                                  </p>
+                                  <p>
+                                    Tipo de año: 1: Año Ordinario, 2: Año Exacto
+                                  </p>
+                                </vs-popup>
+                              </div>
                             </label><br>
                           </div>
                         </form>
@@ -160,7 +177,8 @@
                 interestRateType : null,
                 interestRatePeriod : null,
                 compounding : null,
-                typeYear : null
+                typeYear : null,
+                popupActivo:false
             }
         },
         methods: {
@@ -287,4 +305,8 @@
     select{
         color: #ff775c;
     }
+    .info{
+      color: #28201e;
+    }
+
 </style>
