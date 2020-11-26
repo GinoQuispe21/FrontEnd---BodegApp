@@ -69,14 +69,20 @@
         },
         methods: {
             updateProduct() {
+              if (this.salePrice > 0 && this.purchasePrice > 0 && this.salePrice > this.purchasePrice) {
                 this.axios.put(baseURL + 'products/' + this.$store.getters.getProductid, {
-                    productName: this.productName,
-                    providerName: this.providerName,
-                    purchasePrice: this.purchasePrice,
-                    salePrice: this.salePrice,
+                  productName: this.productName,
+                  providerName: this.providerName,
+                  purchasePrice: this.purchasePrice,
+                  salePrice: this.salePrice,
                 }).then(response => {
-                    console.log(response)
+                  console.log(response)
                 })
+                alert("Se actualizo el producto")
+              }
+              else{
+                alert("Se ingreso valores incorrectos, porfavor verifique")
+              }
             }
         }
     }

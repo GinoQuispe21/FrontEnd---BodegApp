@@ -54,20 +54,26 @@
             }
         },
         methods:{
-            postProduct(){
-                alert("funca")
+            postProduct() {
+              if (this.salePrice > 0 && this.purchasePrice > 0 && this.salePrice > this.purchasePrice) {
                 this.axios.post(baseURL + 'products', {
-                    productName : this.productName,
-                    providerName : this.providerName,
-                    purchasePrice : this.purchasePrice,
-                    salePrice : this.salePrice,
+                  productName: this.productName,
+                  providerName: this.providerName,
+                  purchasePrice: this.purchasePrice,
+                  salePrice: this.salePrice,
 
                 })
                     .then((responseUser) => {
-                        //Create Product
-                        this.axios.post(baseURL + 'products' + responseUser.data.id, {
-                            address: this.form.address,
-                        })})
+                      //Create Product
+                      this.axios.post(baseURL + 'products' + responseUser.data.id, {
+                        address: this.form.address,
+                      })
+                    })
+                alert("Se creo el producto")
+              }
+              else{
+                alert("Se ingreso valores incorrectos, porfavor verifique")
+              }
             }
         }
     }
