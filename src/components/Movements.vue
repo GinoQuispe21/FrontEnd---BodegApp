@@ -1,7 +1,15 @@
 <template>
     <v-card>
-        <div class="container no-gutters ass">
-            <h1 class="Title">Movimientos</h1>
+        <div style="padding-left: 1rem" class="container no-gutters ass">
+            <h1 >Movimientos</h1>
+            <div style="color: #ff775c" >
+                <small>Paso 1: Ingresar DNI para encontrar al cliente</small>
+                <br>
+                <small>Paso 2: Escribir el monto a pagar, más la fecha</small>
+                <br>
+                <small>Paso 3: Si quiero consultar mis movimientos, revisar las tablas de abajo</small>
+                <br>
+            </div>
             <div class="row justify-content-center align-items-center register_body">
                 <div class=" col-auto ">
                     <div style="align-items: center">
@@ -69,7 +77,7 @@
                                 </div>
                                 <input v-model="generated_date_p" id="date" type="text" step="0.1" class="aaaa"/>
                                 <div class="col-auto">
-                                  <b-btn @click="postPayment()">Pagar</b-btn>
+                                  <b-btn style="color: #28201e" @click="postPayment()">Pagar</b-btn>
                                 </div>
                             </div>
                           <div class="text-right">

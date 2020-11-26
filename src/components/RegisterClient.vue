@@ -2,6 +2,16 @@
     <v-card>
         <div class="container no-gutters ass">
             <h1>Registrar Cliente</h1>
+            <div  style="color: #ff775c">
+                <small>Paso 1: Ingresar los datos del cliente</small>
+                <small>--</small>
+                <small>NOTA: NO SE PUEDE REGISTRAR DOS CLIENTES CON EL MISMO DNI</small>
+                <br>
+                <small>Paso 2: Escoger un paquete de tasa de interés para el cliente</small>
+                <br>
+                <small>Paso 3: Darle al botón "Registrar"</small>
+                <br>
+            </div>
             <div class="row justify-content-center align-items-center register_body">
                 <div class="col-auto">
                     <div class="bg-primary register_form">

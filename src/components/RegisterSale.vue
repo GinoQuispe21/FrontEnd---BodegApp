@@ -2,6 +2,17 @@
     <v-card>
         <div class="container no-gutters ass">
             <h1>Registrar Venta</h1>
+            <div style="padding-left: 0.5rem">
+            <small>Paso 1: Ingresar DNI para encontrar al cliente</small>
+            <br>
+            <small>Paso 2: Seleccionar productos, con una cantidad, para agregarlo a la lista de compra</small>
+            <br>
+            <small>Paso 3: Seleccionar tipo de delivery</small>
+            <br>
+            <small>Paso 4: Ingresar la fecha de la orden</small>
+            <br>
+                <small>Paso 5: Registrar Venta</small>
+            </div>
             <div class="row justify-content-center align-items-center register_body">
                 <div class=" col-auto">
                     <div class="help">
@@ -415,5 +426,8 @@
       background-color: #ff775c;
       opacity: 0.90;
       height: auto;
+    }
+    small{
+        color: #ff775c;
     }
 </style>
