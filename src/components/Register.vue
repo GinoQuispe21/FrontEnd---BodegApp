@@ -7,9 +7,6 @@
                 <v-btn text to="/" class="text-info">
                     Iniciar Sesión
                 </v-btn>
-                <v-btn text to="/homepage" class="text-info">
-                    Página de Inicio
-                </v-btn>
                 <v-divider vertical></v-divider>
             </v-toolbar-items>
         </v-toolbar>
@@ -141,7 +138,9 @@
                         //Create User
                         this.axios.post(baseURL + 'users' + responseUser.data.id, {
                             address: this.form.address,
-                        })})
+
+                        })
+                        this.$router.push('/l')})
                 }
                 else{ alert("Error")}
             }
